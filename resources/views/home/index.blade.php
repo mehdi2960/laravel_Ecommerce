@@ -299,8 +299,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
                 </div>
             </div>
         </div>
@@ -459,12 +457,15 @@
                                             @endif
                                         </form>
 
-
                                         <div class="pro-details-meta">
                                             <span>دسته بندی :</span>
                                             <ul>
-                                                <li><a href="#">{{$product->category->parent->name}}
-                                                        ,{{$product->category->name}}</a></li>
+                                                <li>
+                                                    <a href="#">
+                                                        {{$product->category->parent->name}}
+                                                        ,{{$product->category->name}}
+                                                    </a>
+                                                </li>
 
                                             </ul>
                                         </div>
@@ -474,9 +475,7 @@
                                             <ul>
                                                 @foreach($product->tags as $tag)
                                                     <li><a href="#">{{$tag->name}}{{$loop->last?'':'،'}}</a></li>
-
                                                 @endforeach
-
                                             </ul>
                                         </div>
                                     </div>

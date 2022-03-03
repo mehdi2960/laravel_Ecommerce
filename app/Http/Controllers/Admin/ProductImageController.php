@@ -16,6 +16,7 @@ class ProductImageController extends Controller
 
         $primaryImage->move(public_path(env('PRODUCT_IMAGES_UPLOAD_PATH')), $fileNamePrimaryImage);
 
+        //$images
         $fileNameImages = [];
         foreach ($images as $image) {
             $fileNameImage = generateFileName($image->getClientOriginalName());

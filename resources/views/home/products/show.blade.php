@@ -262,18 +262,14 @@
                                             </div>
                                         </div>
                                     @endforeach
-
                                 </div>
-
                                 <div id="comments" class="ratting-form-wrapper text-right">
                                     <span> نوشتن دیدگاه </span>
-
                                     <div class="my-3" id="dataReadonlyReview"
                                          data-rating-stars="5"
                                          data-rating-value="0"
                                          data-rating-input="#rateInput">
                                     </div>
-
                                     <div class="ratting-form">
                                         <form action="{{route('home.comments.store',['product'=>$product->id])}}" method="POST">
                                             @csrf

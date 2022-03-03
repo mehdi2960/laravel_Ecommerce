@@ -27,7 +27,4 @@ function convertShamsiToGregorianDate($date)
     return implode("-", $arrayGergorianDate) . " " . $shamsiDateSplit[3];
 }
 
-
-
-
 ?>

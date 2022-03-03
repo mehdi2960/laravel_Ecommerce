@@ -12,9 +12,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
-use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
+use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishlistController;
 use App\Models\User;
@@ -48,8 +48,9 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
 
         //change Approve
         Route::get('/comments /{comment}/change-approve',[CommentController::class,'changeApprove'])->name('comments.change-approve');
-         // Get Category Attributes
-        Route::get('/category-attributes/{category}',[CategoryController::class,'getCategoryAttributes']);
+
+        // Get Category Attributes
+        Route::get('/category-attributes/{category}', [CategoryController::class, 'getCategoryAttributes']);
 
         // Edit Product Image
         Route::get('/products/{product}/images-edit' ,[ProductImageController::class , 'edit'])->name('products.images.edit');

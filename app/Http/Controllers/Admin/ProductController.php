@@ -15,22 +15,13 @@ use App\Models\ProductImage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $products = Product::latest()->paginate(20);
         return view('admin.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
        $brands=Brand::all();
@@ -39,12 +30,7 @@ class ProductController extends Controller
        return view('admin.products.create',compact('brands','tags','categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -69,6 +55,7 @@ class ProductController extends Controller
         try {
             DB::beginTransaction();
 
+            //Image Store
             $productImageController = new ProductImageController();
             $fileNameImages = $productImageController->upload($request->primary_image, $request->images);
 
@@ -83,6 +70,7 @@ class ProductController extends Controller
                 'delivery_amount_per_product' => $request->delivery_amount_per_product,
             ]);
 
+            //ProductImage
             foreach ($fileNameImages['fileNameImages'] as $fileNameImage) {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -90,13 +78,16 @@ class ProductController extends Controller
                 ]);
             }
 
+            //Attribute Store
             $productAttributeController = new ProductAttributeController();
             $productAttributeController->store($request->attribute_ids, $product);
 
+            //Variation Store
             $category = Category::find($request->category_id);
             $productVariationController = new ProductVariationController();
             $productVariationController->store($request->variation_values, $category->attributes()->wherePivot('is_variation', 1)->first()->id, $product);
 
+            //Tag Store
             $product->tags()->attach($request->tag_ids);
 
             DB::commit();
@@ -109,12 +100,7 @@ class ProductController extends Controller
         alert()->success('محصول مورد نظر ایجاد شد', 'باتشکر');
         return redirect()->route('admin.products.index');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Product $product)
     {
         $productAttributes = $product->attributes()->with('attribute')->get();
@@ -125,12 +111,6 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
         $brands = Brand::all();
@@ -143,13 +123,6 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -201,12 +174,6 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
@@ -220,7 +187,6 @@ class ProductController extends Controller
 
     public function updateCategory(Request $request, Product $product)
     {
-        // dd($request->all());
         $request->validate([
             'category_id' => 'required',
             'attribute_ids' => 'required',

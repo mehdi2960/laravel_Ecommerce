@@ -175,8 +175,7 @@ class CategoryController extends Controller
     {
         $attributes=$category->attributes()->wherePivot('is_variation',0)->get();
         $variation=$category->attributes()->wherePivot('is_variation',1)->first();
-
-        return ['attributes'=>$attributes,'variation'=>$variation];
+        return ['attrubtes'=>$attributes,'variation'=>$variation];
 
     }
 }
