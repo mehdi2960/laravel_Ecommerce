@@ -91,8 +91,10 @@
 
                     <div class="form-group col-md-12">
                         <label for="description">توضیحات</label>
-                        <textarea class="form-control" id="description" name="description"
-                            rows="4">{{ $product->description }}</textarea>
+                        <textarea class="form-control"
+                                  id="description"
+                                  name="description"
+                                  rows="4">{{ $product->description }}</textarea>
                     </div>
 
                     {{-- Delivery Section --}}

@@ -8,6 +8,7 @@
     <script>
         function filter() {
 
+            // Attribute Filter
             let attributes = @json($attributes);
             attributes.map(attribute => {
 
@@ -23,6 +24,7 @@
 
             });
 
+            // Variation Filter
             let variation = $('.variation:checked').map(function() {
                 return this.value;
             }).get().join('-');
@@ -32,6 +34,7 @@
                 $('#filter-variation').val(variation);
             }
 
+            // sortBy Filter
             let sortBy = $('#sort-by').val();
             if (sortBy == "default") {
                 $('#filter-sort-by').prop('disabled', true);
@@ -39,6 +42,7 @@
                 $('#filter-sort-by').val(sortBy);
             }
 
+            // Search
             let search = $('#search-input').val();
             if (search == "") {
                 $('#filter-search').prop('disabled', true);
@@ -110,7 +114,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="shop-area pt-95 pb-100">
         <div class="container">
@@ -206,16 +209,20 @@
                                     <option value="default"> مرتب سازی </option>
                                     <option value="max"
                                         {{ request()->has('sortBy') && request()->sortBy == 'max' ? 'selected' : '' }}>
-                                        بیشترین قیمت </option>
+                                        بیشترین قیمت
+                                    </option>
                                     <option value="min"
                                         {{ request()->has('sortBy') && request()->sortBy == 'min' ? 'selected' : '' }}> کم
-                                        ترین قیمت </option>
+                                        ترین قیمت
+                                    </option>
                                     <option value="latest"
                                         {{ request()->has('sortBy') && request()->sortBy == 'latest' ? 'selected' : '' }}>
-                                        جدیدترین </option>
+                                        جدیدترین
+                                    </option>
                                     <option value="oldest"
                                         {{ request()->has('sortBy') && request()->sortBy == 'oldest' ? 'selected' : '' }}>
-                                        قدیمی ترین </option>
+                                        قدیمی ترین
+                                    </option>
                                 </select>
                             </div>
 
@@ -268,9 +275,12 @@
                                                                 @endauth
                                                             </li>
                                                             <li>
-                                                                <a href="#"><i class="sli sli-refresh"></i><span
-                                                                        class="ht-product-action-tooltip"> مقایسه
-                                                                    </span></a>
+                                                                <a href="#">
+                                                                    <i class="sli sli-refresh"></i>
+                                                                    <span class="ht-product-action-tooltip">
+                                                                        مقایسه
+                                                                    </span>
+                                                                </a>
                                                             </li>
                                                         </ul>
                                                     </div>

@@ -9,7 +9,6 @@
         $('#brandSelect').selectpicker({
             'title': 'انتخاب برند'
         });
-
         $('#tagSelect').selectpicker({
             'title': 'انتخاب تگ'
         });
@@ -37,8 +36,9 @@
 
         $('#categorySelect').on('changed.bs.select', function() {
             let categoryId = $(this).val();
-            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response, status)
-            {
+
+            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response,
+                                                                                                     status) {
                 if (status == 'success') {
                     // console.log(response);
 
@@ -56,6 +56,7 @@
                             for: attribute.name,
                             text: attribute.name
                         }));
+
                         attributeFormGroup.append($('<input/>', {
                             type: 'text',
                             class: 'form-control',
@@ -64,9 +65,11 @@
                         }));
 
                         $('#attributes').append(attributeFormGroup);
+
                     });
 
                     $('#variationName').text(response.variation.name);
+
                 } else {
                     alert('مشکل در دریافت لیست ویژگی ها');
                 }
@@ -74,8 +77,9 @@
                 alert('مشکل در دریافت لیست ویژگی ها');
             })
 
-        // console.log(categoryId);
+            // console.log(categoryId);
         });
+
         $("#czContainer").czMore();
 
     </script>
@@ -91,11 +95,13 @@
                 <h5 class="font-weight-bold">ایجاد محصول</h5>
             </div>
             <hr>
+
             @include('admin.sections.errors')
+
             <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="form-row">
 
+                <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
                         <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}">
@@ -129,7 +135,8 @@
 
                     <div class="form-group col-md-12">
                         <label for="description">توضیحات</label>
-                        <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+                        <textarea class="form-control" id="description"
+                                  name="description">{{ old('description') }}</textarea>
                     </div>
 
                     {{-- Product Image Section --}}
@@ -164,11 +171,9 @@
                         <div class="row justify-content-center">
                             <div class="form-group col-md-3">
                                 <label for="category_id">دسته بندی</label>
-                                <select id="categorySelect" name="category_id" class="form-control">
+                                <select id="categorySelect" name="category_id" class="form-control" data-live-search="true">
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">
-                                            {{ $category->name }}
-                                            -
+                                        <option value="{{ $category->id }}">{{ $category->name }} -
                                             {{ $category->parent->name }}
                                         </option>
                                     @endforeach
@@ -181,8 +186,10 @@
                         <div id="attributes" class="row"></div>
                         <div class="col-md-12">
                             <hr>
-                            <p>افزودن قیمت و موجودی برای متغیر <span class="font-weight-bold" id="variationName"></span> :</p>
+                            <p>افزودن قیمت و موجودی برای متغیر <span class="font-weight-bold" id="variationName"></span> :
+                            </p>
                         </div>
+
                         <div id="czContainer">
                             <div id="first">
                                 <div class="recordset">
@@ -207,7 +214,9 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     {{-- Delivery Section --}}
                     <div class="col-md-12">
                         <hr>

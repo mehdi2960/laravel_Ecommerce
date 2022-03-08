@@ -22,4 +22,9 @@ class Banner extends Model
             ]
         ];
     }
+
+    public function getIsActiveAttribute($is_active): string
+    {
+        return $is_active ? 'فعال' : 'غیر فعال';
+    }
 }

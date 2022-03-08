@@ -421,7 +421,8 @@
                                                         <select name="variation-name" class="form-control variation-select">
                                                             @foreach ($product->variations()->where('quantity' , '>' , 0)->get() as $variation)
                                                                 <option value="{{ json_encode($variation->only(['id' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
-                                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>{{ $variation->value }}</option>
+                                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>{{ $variation->value }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -504,11 +505,9 @@
                                                     <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $image->image) }}" alt="" />
                                                 </a>
                                             @endforeach
-
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

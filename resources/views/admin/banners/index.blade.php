@@ -57,8 +57,7 @@
                                     {{ $banner->priority }}
                                 </th>
                                 <th>
-                                    <span
-                                        class="{{ $banner->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
+                                    <span class="{{ $banner->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
                                         {{ $banner->is_active }}
                                     </span>
                                 </th>
