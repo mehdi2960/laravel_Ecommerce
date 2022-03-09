@@ -16,6 +16,11 @@
 </head>
 <body>
 
+<div class="wrapper text-center">
+    <div id="overlayer"></div>
+        <span class="loader">
+            <span class="loader-inner"></span>
+        </span>
     @include('home.sections.header')
 
     @include('home.sections.mobile_off_canvas')
@@ -23,6 +28,8 @@
     @yield('content')
 
     @include('home.sections.footer')
+</div>
+
 <!-- JavaScript-->
 <script src="{{ asset('/js/home/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ asset('/js/home/plugins.js') }}"></script>
@@ -31,6 +38,13 @@
 @include('sweet::alert')
 
 @yield('script')
+
+<script>
+    $(window).load(function() {
+        $(".loader").delay(1000).fadeOut("slow");
+        $("#overlayer").delay(1000).fadeOut("slow");
+    })
+</script>
 
 </body>
 </html>
