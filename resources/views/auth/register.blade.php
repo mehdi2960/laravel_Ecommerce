@@ -127,7 +127,7 @@
             <div class="breadcrumb-content text-center">
                 <ul>
                     <li>
-                        <a href="{{route('home.index')}}">صفحه ای اصلی</a>
+                        <a href="{{route('home.index')}}">صفحه اصلی</a>
                     </li>
                     <li class="active"> ورود </li>
                 </ul>

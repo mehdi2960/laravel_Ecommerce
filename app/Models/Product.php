@@ -15,8 +15,6 @@ class Product extends Model
     protected $guarded = [];
     protected $appends=['quantity_check','sale_check','price_check'];
 
-
-
     public function sluggable():array
     {
         return [
@@ -33,6 +31,7 @@ class Product extends Model
 
     public function scopeFilter($query)
     {
+        //attribute
         if (request()->has('attribute')) {
             foreach (request()->attribute as $attribue) {
                 $query->whereHas('attributes', function ($query) use ($attribue) {
@@ -47,6 +46,7 @@ class Product extends Model
             }
         }
 
+        //variation
         if (request()->has('variation')) {
             $query->whereHas('variations', function ($query) {
                 foreach (explode('-', request()->variation) as $index => $variation) {
@@ -59,6 +59,7 @@ class Product extends Model
             });
         }
 
+        //sortBy
         if (request()->has('sortBy')) {
             $sortBy = request()->sortBy;
 
@@ -80,7 +81,7 @@ class Product extends Model
                     break;
             }
         }
-        // dd($query->toSql());
+
         return $query;
     }
 
@@ -98,6 +99,7 @@ class Product extends Model
     {
         return $this->variations()->where('quantity', '>', 0)->first() ?? 0;
     }
+
     public function getSaleCheckAttribute()
     {
         return $this->variations()->where('quantity', '>', 0)->where('sale_price','!=',null)
@@ -105,6 +107,7 @@ class Product extends Model
                 ->where('date_on_sale_to','>',Carbon::now())
                 ->orderBy('sale_price')->first() ?? false;
     }
+
     public function getPriceCheckAttribute()
     {
         return $this->variations()->where('quantity', '>', 0)->orderBy('price')->first() ?? false;

@@ -9,14 +9,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductVariation extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = "product_variations";
     protected $guarded = [];
-    protected $appends = ['is_sale'];
+    protected $appends = ['is_sale', 'persent_sale'];
 
+    // حراج
     public function getIsSaleAttribute()
     {
         return ($this->sale_price != null && $this->date_on_sale_from < Carbon::now() && $this->date_on_sale_to > Carbon::now()) ? true : false;
+    }
+
+    // درصد تخفیف
+    public function getPersentSaleAttribute()
+    {
+        return $this->is_sale ? round((($this->price - $this->sale_price) / $this->price) * 100) : null;
     }
 }

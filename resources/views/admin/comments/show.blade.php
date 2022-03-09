@@ -15,8 +15,7 @@
                 <div class="form-group col-md-3">
                     <label>نام کاربر</label>
                     <input type="text" class="form-control"
-                           value="{{($comment->user->name==null?$comment->user->cellphone:$comment->user->name)}}"
-                           disabled>
+                           value="{{($comment->user->name==null?$comment->user->cellphone:$comment->user->name)}}" disabled>
                 </div>
 
                 <div class="form-group col-md-3">

@@ -80,11 +80,14 @@ Route::get('/remove-from-wishlist/{product}',[WishlistController::class,'remove'
 //Compare
 Route::get('/compare', [CompareController::class, 'index'])->name('home.compare.index');
 Route::get('/add-to-compare/{product}', [CompareController::class, 'add'])->name('home.compare.add');
-Route::get('/remove-to-compare/{product}', [CompareController::class, 'remove'])->name('home.compare.remove');
-
+Route::get('/remove-from-compare/{product}', [CompareController::class, 'remove'])->name('home.compare.remove');
 
 //Cart
-Route::post('/add-to-cart/', [CartController::class, 'add'])->name('home.cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('home.cart.index');
+Route::post('/add-to-cart', [CartController::class, 'add'])->name('home.cart.add');
+Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
+Route::put('/cart', [CartController::class, 'update'])->name('home.cart.update');
+Route::get('/clear-cart', [CartController::class, 'clear'])->name('home.cart.clear');
 
 
 //Route::get('/login/{provider}',[AuthController::class,'redirectToProvider'])->name('provider.login');
@@ -104,10 +107,10 @@ Route::prefix('profile')->name('home.')->group(function () {
 
 });
 
-Route::get('/test', function () {
-
- $user = User::find(1);
- $user->notify(new OTPSms(1234));
-
-});
+//Route::get('/test', function () {
+//
+// $user = User::find(1);
+// $user->notify(new OTPSms(1234));
+//
+//});
 

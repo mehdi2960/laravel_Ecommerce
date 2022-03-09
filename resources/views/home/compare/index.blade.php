@@ -1,7 +1,7 @@
 @extends('home.layouts.home')
 
 @section('title')
-    صفحه ای مقایسه
+    صفحه مقایسه
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="breadcrumb-content text-center">
                 <ul>
                     <li>
-                        <a href="{{ route('home.index') }}"> صفحه ای اصلی </a>
+                        <a href="{{ route('home.index') }}"> صفحه اصلی </a>
                     </li>
                     <li class="active"> مقایسه محصول </li>
                 </ul>
@@ -38,7 +38,7 @@
                                                      alt="Compare Product">
                                             </a>
                                             <a href="{{ route('home.categories.show' , ['category' => $product->category->slug ]) }}" class="category"> {{ $product->category->name }} </a>
-                                            <a href="single-product-sale.html" class="title"> {{ $product->name }} </a>
+                                            <a href="#" class="title"> {{ $product->name }} </a>
                                         </td>
                                     @endforeach
                                 </tr>

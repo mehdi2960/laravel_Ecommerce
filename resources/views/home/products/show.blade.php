@@ -145,7 +145,9 @@
                                     @endauth
                                 </div>
                                 <div class="pro-details-compare">
-                                    <a title="Add To Compare" href="#"><i class="sli sli-refresh"></i></a>
+                                    <a title="Add To Compare" href="#">
+                                        <i class="sli sli-refresh"></i>
+                                    </a>
                                 </div>
                             </div>
                         @else
@@ -169,7 +171,9 @@
                             <span>تگ ها :</span>
                             <ul>
                                 @foreach($product->tags as $tag)
-                                    <li><a href="#">{{$tag->name}}{{$loop->last?'':'،'}}</a></li>
+                                    <li>
+                                        <a href="#">{{$tag->name}}{{$loop->last?'':'،'}}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -197,7 +201,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -221,7 +224,6 @@
                                     <p class="text-justify">
                                         {{$product->description}}
                                     </p>
-
                                 </div>
                             </div>
                             <div id="des-details3" class="tab-pane">
@@ -286,23 +288,22 @@
                                                         <input type="submit" value="ارسال">
                                                     </div>
                                                 </div>
-
                                                 <div class="mt-3 text-center w-100">
                                                     @include('home.sections.errors')
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="pro-dec-banner">
-                        <a href="#"><img src="{{asset('images/home/banner-7.png')}}" alt=""></a>
+                        <a href="#">
+                            <img src="{{asset('images/home/banner-7.png')}}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>

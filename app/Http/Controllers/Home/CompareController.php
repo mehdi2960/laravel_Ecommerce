@@ -10,10 +10,12 @@ class CompareController extends Controller
 {
     public function add(Product $product)
     {
+        // وجود داشتن سشن
         if (session()->has('compareProducts')) {
 
+           // اگه تکراری وجود داشت اضافه نکن
             if (in_array($product->id, session()->get('compareProducts'))) {
-                alert()->warning('محصول مورد نظر به لیست علاقه مندی های شما اضافه شده شد', 'دقت کنید');
+                alert()->warning('محصول مورد نظر به لیست مقایسه شما اضافه شده است', 'دقت کنید');
                 return redirect()->back();
             }
             session()->push('compareProducts', $product->id);
@@ -21,7 +23,7 @@ class CompareController extends Controller
             session()->put('compareProducts', [$product->id]);
         }
 
-        alert()->success('محصول مورد نظر به لیست علاقه مندی های شما اضافه شد', 'باتشکر');
+        alert()->success('محصول مورد نظر به لیست مقایسه شما اضافه شد', 'باتشکر');
         return redirect()->back();
     }
 
@@ -36,5 +38,25 @@ class CompareController extends Controller
 
         alert()->warning('در ابتدا باید محصولی برای مقایسه اضافه کنید', 'دقت کنید');
         return redirect()->back();
+    }
+
+    public function remove($productId)
+    {
+        if (session()->has('compareProducts')) {
+            foreach (session()->get('compareProducts') as $key=>$item){
+                if ($item==$productId){
+                    session()->pull('compareProducts'.$key);
+                }
+            }
+            if (session()->get('compareProducts')==[]){
+                session()->forget('compareProducts');
+                return redirect()->route('home.index');
+            }
+            return redirect()->route('home.compare.index');
+
+        }else{
+            alert()->warning('در ابتدا باید محصولی برای مقایسه اضافه کنید', 'دقت کنید');
+            return redirect()->back();
+        }
     }
 }
