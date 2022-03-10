@@ -127,9 +127,10 @@
                                         <h4 class="cart-bottom-title section-bg-gray"> کد تخفیف </h4>
                                     </div>
                                     <div class="discount-code">
-                                        <p> لورم ایپسوم متن ساختگی با تولید سادگی </p>
-                                        <form>
-                                            <input type="text" required="" name="name">
+                                        <p> اگه کد تخفیف دارید لطفا کد تخفیف خود را وارد نمایید. </p>
+                                        <form action="{{route('home.coupons.check')}}" method="post">
+                                            @csrf
+                                            <input type="text" required="" name="code">
                                             <button class="cart-btn-2" type="submit"> ثبت</button>
                                         </form>
                                     </div>
@@ -154,6 +155,17 @@
                                             مبلغ تخفیف کالاها :
                                             <span style="color: red;">
                                                {{number_format(cartTotalSaleAmount())}}
+                                                تومان
+                                            </span>
+                                        </h5>
+                                    @endif
+
+                                    @if(session()->has('coupon'))
+                                        <hr>
+                                        <h5>
+                                            مبلغ کد تخفیف :
+                                            <span style="color: red;">
+                                               {{number_format(session()->get('coupon.amount'))}}
                                                 تومان
                                             </span>
                                         </h5>

@@ -54,12 +54,11 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'qtybutton'=>'required'
+            'qtybutton' => 'required'
         ]);
 
-        foreach ($request->qtybutton as $rowId=>$quantity)
-        {
-            $item=Cart::get($rowId);
+        foreach ($request->qtybutton as $rowId => $quantity) {
+            $item = Cart::get($rowId);
             if ($quantity > $item->attributes->quantity) {
                 alert()->error('تعداد وارد شده از محصول درست نمی باشد.', 'دقت کنید');
                 return redirect()->back();
@@ -90,6 +89,27 @@ class CartController extends Controller
         Cart::clear();
 
         alert()->warning('سبد خرید شما پاک شد.', 'با تشکر');
+        return redirect()->back();
+    }
+
+    public function checkCoupon(Request $request)
+    {
+        $request->validate([
+            'code' => 'required'
+        ]);
+
+        if (!auth()->check()) {
+            alert()->error('برای استفاده از کد تخفیف نیاز هست در ابتدا وارد سایت شوید.', 'دقت کنید');
+            return redirect()->back();
+        }
+
+        $result = checkCoupon($request->code);
+
+        if (array_key_exists('error', $result)) {
+            alert()->error($result['error'], 'دقت کنید');
+        } else {
+            alert()->success($result['success'], 'با تشکر');
+        }
         return redirect()->back();
     }
 }

@@ -91,6 +91,9 @@ Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name
 Route::put('/cart', [CartController::class, 'update'])->name('home.cart.update');
 Route::get('/clear-cart', [CartController::class, 'clear'])->name('home.cart.clear');
 
+//Check-coupon
+Route::post('/check-coupon', [CartController::class, 'checkCoupon'])->name('home.coupons.check');
+
 
 //Route::get('/login/{provider}',[AuthController::class,'redirectToProvider'])->name('provider.login');
 //Route::get('/login/{provider}/callback',[AuthController::class,'handleProviderCallback']);
