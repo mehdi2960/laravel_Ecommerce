@@ -19,6 +19,7 @@ class AuthController extends Controller
             return view('auth.login');
         }
 
+        // method Post
         $request->validate([
             'cellphone' => 'required|iran_mobile'
         ]);
@@ -41,6 +42,7 @@ class AuthController extends Controller
                     'login_token' => $loginToken
                 ]);
             }
+
             $user->notify(new OTPSms($OTPCode));
 
             return response(['login_token' => $loginToken], 200);

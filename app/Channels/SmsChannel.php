@@ -3,7 +3,8 @@
 namespace App\Channels;
 
 use Ghasedak\GhasedakApi;
-use Illuminate\Notification\Notification;
+//use Illuminate\Notification\Notification;
+use Illuminate\Support\Facades\Notification;
 
 
 class SmsChannel

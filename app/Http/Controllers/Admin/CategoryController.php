@@ -28,9 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $parentcategories = Category::where('parent_id', 0)->get();
+        $parentCategories = Category::where('parent_id', 0)->get();
         $attributes = Attribute::all();
-        return view('admin.categories.create', compact('parentcategories', 'attributes'));
+        return view('admin.categories.create', compact('parentCategories', 'attributes'));
     }
 
     /**

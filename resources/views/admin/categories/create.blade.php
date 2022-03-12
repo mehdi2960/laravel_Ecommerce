@@ -26,6 +26,7 @@
 
             $("#attributeIsFilterSelect").find("option").remove();
             $("#variationSelect").find("option").remove();
+
             attributeForFilter.forEach((element)=>{
                 let attributeFilterOption = $("<option/>" , {
                     value : element.id,
@@ -80,8 +81,8 @@
                         <label for="parent_id">والد</label>
                         <select class="form-control" name="parent_id" id="parent_id">
                             <option value="0">بدون والد</option>
-                            @foreach ($parentcategories as $parentcategory)
-                              <option value="{{$parentcategory->id}}">{{$parentcategory->name}}</option>
+                            @foreach ($parentCategories as $parentCategory)
+                              <option value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -95,15 +96,17 @@
                     <div class="form-group col-md-3">
                         <label for="attribute_ids">ویژگی</label>
                         <select id="attributeSelect" name="attribute_ids[]" multiple class="form-control" data-live-search="true">
-                           @foreach ($attributes as $attribut)
-                           <option value="{{$attribut->id}}" selected>{{$attribut->name}}</option>
+                           @foreach ($attributes as $attribute)
+                           <option value="{{$attribute->id}}" selected>{{$attribute->name}}</option>
                            @endforeach
                         </select>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="attribute_is_filter_ids">انتخاب ویژگی های قابل فیلتر</label>
-                        <select id="attributeIsFilterSelect" name="attribute_is_filter_ids[]" class="form-control" multiple
+                        <select id="attributeIsFilterSelect" name="attribute_is_filter_ids[]"
+                            class="form-control"
+                            multiple
                             data-live-search="true">
                         </select>
                     </div>

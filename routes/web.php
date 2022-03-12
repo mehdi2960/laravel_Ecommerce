@@ -112,6 +112,14 @@ Route::prefix('profile')->name('home.')->group(function () {
 
 });
 
+//about-us
+Route::get('/about-us',[HomeController::class,'aboutUs'])->name('home.about-us');
+
+//contact-us
+Route::get('/contact-us',[HomeController::class,'contactUs'])->name('home.contact-us');
+Route::post('/contact-us-form',[HomeController::class,'contactUsForm'])->name('home.contact-us-form');
+
+
 //Route::get('/test', function () {
 //
 // $user = User::find(1);

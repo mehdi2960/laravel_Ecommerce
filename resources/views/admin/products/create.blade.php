@@ -9,6 +9,7 @@
         $('#brandSelect').selectpicker({
             'title': 'انتخاب برند'
         });
+
         $('#tagSelect').selectpicker({
             'title': 'انتخاب تگ'
         });
@@ -36,12 +37,11 @@
 
         $('#categorySelect').on('changed.bs.select', function() {
             let categoryId = $(this).val();
+            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response,status) {
 
-            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response,
-                                                                                                     status) {
                 if (status == 'success') {
-                    // console.log(response);
 
+                    // console.log(response);
                     $('#attributesContainer').fadeIn();
 
                     // Empty Attribute Container
@@ -56,32 +56,24 @@
                             for: attribute.name,
                             text: attribute.name
                         }));
-
                         attributeFormGroup.append($('<input/>', {
                             type: 'text',
                             class: 'form-control',
                             id: attribute.name,
                             name: `attribute_ids[${attribute.id}]`
                         }));
-
                         $('#attributes').append(attributeFormGroup);
-
                     });
-
                     $('#variationName').text(response.variation.name);
-
                 } else {
                     alert('مشکل در دریافت لیست ویژگی ها');
                 }
             }).fail(function() {
                 alert('مشکل در دریافت لیست ویژگی ها');
             })
-
             // console.log(categoryId);
         });
-
         $("#czContainer").czMore();
-
     </script>
 @endsection
 
@@ -241,5 +233,6 @@
         </div>
 
     </div>
+
 
 @endsection
