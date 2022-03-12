@@ -22,6 +22,7 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "mokhosh/validation": "^2.6",
+        "timehunter/laravel-google-recaptcha-v3": "~2.5",
         "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {

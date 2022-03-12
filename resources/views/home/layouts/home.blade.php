@@ -39,6 +39,8 @@
 
 @yield('script')
 
+{!!  GoogleReCaptchaV3::init() !!}
+
 <script>
     $(window).load(function() {
         $(".loader").delay(1000).fadeOut("slow");

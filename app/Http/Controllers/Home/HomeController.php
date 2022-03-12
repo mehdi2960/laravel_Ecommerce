@@ -8,7 +8,7 @@ use App\Models\ContactUs;
 use App\Models\Product;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 class HomeController extends Controller
 {
     public function index()
@@ -38,7 +38,8 @@ class HomeController extends Controller
             'name'=>'required|string|min:4|max:50',
             'email'=>'required|email',
             'subject'=>'required|string|min:4|max:100',
-            'text'=>'required|string|min:4|max:3000'
+            'text'=>'required|string|min:4|max:3000',
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us')]
         ]);
 
         ContactUs::create([
