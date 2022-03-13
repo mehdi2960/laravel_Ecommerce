@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion pr-0" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -16,6 +16,28 @@
         <a class="nav-link" href="{{route('dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span> داشبورد </span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        مدیریت کاربران
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserss" aria-expanded="true"
+           aria-controls="collapsePages">
+            <i class="fas fa-fw fa-users"></i>
+            <span> کاربران </span>
+        </a>
+        <div id="collapseUserss" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.users.index') }}">لیست کاربران</a>
+                <a class="collapse-item" href="{{ route('admin.users.index') }}">گروه های کاربری</a>
+                <a class="collapse-item" href="{{ route('admin.permissions.index') }}">پرمیژن ها</a>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->
@@ -42,9 +64,9 @@
             </div>
         </div>
     </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
-
     {{-- Heading--}}
     <div class="sidebar-heading">
         سفارشات

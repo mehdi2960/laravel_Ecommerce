@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "anetwork/validation": "^2.2",
+        "artesaos/seotools": "^0.22.0",
         "cviebrock/eloquent-sluggable": "^8.0",
         "darryldecode/cart": "^4.2",
         "fideloper/proxy": "^4.4",
@@ -21,7 +22,9 @@
         "laravel/framework": "^8.12",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
+        "laravelium/sitemap": "^8.0",
         "mokhosh/validation": "^2.6",
+        "spatie/laravel-permission": "^5.5",
         "timehunter/laravel-google-recaptcha-v3": "~2.5",
         "uxweb/sweet-alert": "^2.0"
     },

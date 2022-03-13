@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CartController;
@@ -16,8 +18,10 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
+use App\Http\Controllers\Home\SitemapController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishlistController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Notifications\OTPSms;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +51,9 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
         Route::resource('banners', BannerController::class);
         Route::resource('comments', CommentController::class);
         Route::resource('coupons', CouponController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('permissions', PermissionController::class);
+        Route::resource('roles', RoleController::class);
 
         //change Approve
         Route::get('/comments /{comment}/change-approve',[CommentController::class,'changeApprove'])->name('comments.change-approve');
@@ -118,6 +125,11 @@ Route::get('/about-us',[HomeController::class,'aboutUs'])->name('home.about-us')
 //contact-us
 Route::get('/contact-us',[HomeController::class,'contactUs'])->name('home.contact-us');
 Route::post('/contact-us-form',[HomeController::class,'contactUsForm'])->name('home.contact-us-form');
+
+//siteMap
+Route::get('/sitemap',[SitemapController::class,'index'])->name('home.sitemap.index');
+Route::get('/sitemap-products', [SitemapController::class, 'sitemapProducts'])->name('home.sitemap.products');
+Route::get('/sitemap-tags', [SitemapController::class, 'sitemapTags'])->name('home.sitemap.tags');
 
 
 //Route::get('/test', function () {
