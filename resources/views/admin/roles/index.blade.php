@@ -1,17 +1,17 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    نمایش پرمیژن ها
+    نمایش نقش ها
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between mb-4">
-                <h5 class=""> لیست پرمیژن ها ({{$permissions->total()}})</h5>
-                <a class="btn btn-sm btn-outline-primary" href="{{route('admin.permissions.create')}}">
+                <h5 class=""> لیست نقش ها ({{$roles->total()}})</h5>
+                <a class="btn btn-sm btn-outline-primary" href="{{route('admin.roles.create')}}">
                     <i class="fa fa-plus"></i>
-                    ایجاد پرمیژن
+                    ایجاد نقش
                 </a>
             </div>
             <div class="">
@@ -25,15 +25,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($permissions as $key=>$permission)
+                    @foreach($roles as $key=>$role)
                         <tr>
-                            <th>{{$permissions->firstItem()+$key}}</th>
-                            <th>{{$permission->display_name}}</th>
-                            <th>{{$permission->name}}</th>
+                            <th>{{$roles->firstItem()+$key}}</th>
+                            <th>{{$role->display_name}}</th>
+                            <th>{{$role->name}}</th>
                             <th>
-                                <a class="btn btn-sm btn-success" href="{{route('admin.permissions.show',['permission'=>$permission->id])}}">نمایش</a>
-                                <a class="btn btn-sm btn-info" href="{{route('admin.permissions.edit',['permission'=>$permission->id])}}">ویرایش</a>
-
+                                <a class="btn btn-sm btn-success" href="{{route('admin.roles.show',['role'=>$role->id])}}">نمایش</a>
+                                <a class="btn btn-sm btn-info" href="{{route('admin.roles.edit',['role'=>$role->id])}}">ویرایش</a>
                             </th>
                         </tr>
                     @endforeach

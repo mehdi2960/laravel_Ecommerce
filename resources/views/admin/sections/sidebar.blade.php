@@ -34,7 +34,7 @@
         <div id="collapseUserss" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.users.index') }}">لیست کاربران</a>
-                <a class="collapse-item" href="{{ route('admin.users.index') }}">گروه های کاربری</a>
+                <a class="collapse-item" href="{{ route('admin.roles.index') }}">گروه های کاربری</a>
                 <a class="collapse-item" href="{{ route('admin.permissions.index') }}">پرمیژن ها</a>
             </div>
         </div>
@@ -47,6 +47,7 @@
     <div class="sidebar-heading">
         فروشگاه
     </div>
+{{--    @role('admin')--}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true"
            aria-controls="collapsePages">
@@ -60,11 +61,11 @@
                 <a class="collapse-item" href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
                 <a class="collapse-item" href="{{ route('admin.tags.index') }}">تگ ها</a>
                 <a class="collapse-item" href="{{ route('admin.comments.index') }}">کامنت ها</a>
-                <a class="collapse-item" href="{{route('admin.brands.index')}}">برند ها</a>
+                <a class="collapse-item" href="{{ route('admin.brands.index')}}">برند ها</a>
             </div>
         </div>
     </li>
-
+{{--    @endrole--}}
     <!-- Divider -->
     <hr class="sidebar-divider">
     {{-- Heading--}}
