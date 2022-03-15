@@ -7,13 +7,13 @@
 @section('script')
     <script>
         let loginToken;
+
         $('#checkOTPForm').hide();
         $('#resendOTPButton').hide();
 
         $('#loginForm').submit(function(event){
             // console.log( $('#cellphoneInput').val() );
             event.preventDefault();
-
             $.post("{{ url('/login') }}",
                 {
                     '_token' : "{{ csrf_token() }}",
@@ -22,7 +22,6 @@
                 } , function(response , status){
                     console.log(response , status);
                     loginToken = response.login_token;
-
                     swal({
                         icon : 'success',
                         text: 'رمز یکبار مصرف برای شما ارسال شد',
@@ -33,9 +32,8 @@
                     $('#loginForm').fadeOut();
                     $('#checkOTPForm').fadeIn();
                     timer();
-
                 }).fail(function(response){
-                console.log(response.responseJSON);
+                // console.log(response.responseJSON);
                 $('#cellphoneInput').addClass('mb-1');
                 $('#cellphoneInputError').fadeIn();
                 $('#cellphoneInputErrorText').html(response.responseJSON.errors.cellphone[0]);
@@ -54,7 +52,6 @@
                 } , function(response , status){
                     console.log(response , status);
                     $(location).attr('href' , "{{ route('home.index') }}");
-
                 }).fail(function(response){
                 console.log(response.responseJSON);
                 $('#checkOTPInput').addClass('mb-1');
@@ -65,27 +62,22 @@
 
         $('#resendOTPButton').click(function(event){
             event.preventDefault();
-
             $.post("{{ url('/resend-otp') }}",
                 {
                     '_token' : "{{ csrf_token() }}",
                     'login_token' : loginToken
-
                 } , function(response , status){
                     console.log(response , status);
                     loginToken = response.login_token;
-
                     swal({
                         icon : 'success',
                         text: 'رمز یکبار مصرف برای شما ارسال شد',
                         button : 'حله!',
                         timer : 2000
                     });
-
                     $('#resendOTPButton').fadeOut();
                     timer();
                     $('#resendOTPTime').fadeIn();
-
                 }).fail(function(response){
                 console.log(response.responseJSON);
                 swal({
@@ -97,7 +89,7 @@
             })
         });
 
-        function timer() {
+        function timer()  {
             let time = "1:01";
             let interval = setInterval(function() {
                 let countdown = time.split(':');
@@ -128,13 +120,14 @@
             <div class="breadcrumb-content text-center">
                 <ul>
                     <li>
-                        <a href="{{route('home.index')}}">صفحه ای اصلی</a>
+                        <a href="{{ route('home.index') }}">صفحه ای اصلی</a>
                     </li>
                     <li class="active"> ورود </li>
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="login-register-area pt-100 pb-100" style="direction: rtl;">
         <div class="container">
             <div class="row">
@@ -146,42 +139,42 @@
                             </a>
                         </div>
                         <div class="tab-content">
+
                             <div id="lg1" class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
-                                        <form action="{{route('login')}}" method="post">
-                                            @csrf
-                                            <input name="email" placeholder="ایمیل" class="@error('email') mb-1 @enderror" type="email" value="{{old('name')}}">
-                                            @error('email')
-                                            <div class="input-error-validation">
-                                                <strong>{{$message}}</strong>
+
+                                        <form id="loginForm">
+                                            <input id="cellphoneInput" placeholder="شماره تلفن همراه" type="text">
+
+                                            <div id="cellphoneInputError" class="input-error-validation">
+                                                <strong id="cellphoneInputErrorText"></strong>
                                             </div>
-                                            @enderror
-                                            <input type="password" name="password" class="@error('password') mb-1 @enderror" placeholder="رمز عبور">
-                                            @error('password')
-                                            <div class="input-error-validation">
-                                                <strong>{{$message}}</strong>
+
+                                            <div class="button-box d-flex justify-content-between">
+                                                <button type="submit">ارسال</button>
                                             </div>
-                                            @enderror
-                                            <div class="button-box">
-                                                <div class="login-toggle-btn d-flex justify-content-between">
-                                                    <div>
-                                                        <input name="remember" type="checkbox"
-                                                        {{old('remember')? 'checked':''}}
-                                                        >
-                                                        <label> مرا بخاطر بسپار </label>
-                                                    </div>
-                                                    <a href="{{route('password.request')}}"> فراموشی رمز عبور ! </a>
-                                                </div>
+                                        </form>
+
+                                        <form id="checkOTPForm">
+                                            <input id="checkOTPInput" placeholder="رمز یکبار مصرف" type="text">
+
+                                            <div id="checkOTPInputError" class="input-error-validation">
+                                                <strong id="checkOTPInputErrorText"></strong>
+                                            </div>
+
+                                            <div class="button-box d-flex justify-content-between">
                                                 <button type="submit">ورود</button>
-                                                <a href="index.html" class="btn btn-google btn-block mt-4">
-                                                    <i class="sli sli-social-google"></i> ورود با حساب گوگل
-                                                </a>
+                                                <div>
+                                                    <button id="resendOTPButton" type="submit">ارسال مجدد</button>
+                                                    <span id="resendOTPTime"></span>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -132,10 +132,10 @@ Route::get('/sitemap-products', [SitemapController::class, 'sitemapProducts'])->
 Route::get('/sitemap-tags', [SitemapController::class, 'sitemapTags'])->name('home.sitemap.tags');
 
 
-//Route::get('/test', function () {
-//
-// $user = User::find(1);
-// $user->notify(new OTPSms(1234));
-//
-//});
+Route::get('/test', function () {
+
+ $user = User::find(1);
+ $user->notify(new OTPSms(1234));
+
+});
 

@@ -120,7 +120,6 @@
       <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
       <path value="$PROJECT_DIR$/vendor/ghasedak/laravel" />
       <path value="$PROJECT_DIR$/vendor/ghasedak/php" />
-      <path value="$PROJECT_DIR$/vendor/anetwork/validation" />
       <path value="$PROJECT_DIR$/vendor/darryldecode/cart" />
       <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/vendor/league/config" />

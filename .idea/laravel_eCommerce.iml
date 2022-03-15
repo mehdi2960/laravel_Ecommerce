@@ -127,7 +127,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/socialite" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ghasedak/laravel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ghasedak/php" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/anetwork/validation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/darryldecode/cart" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/serializable-closure" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/config" />
