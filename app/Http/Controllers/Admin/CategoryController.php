@@ -10,35 +10,19 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $categories = Category::latest()->paginate(20);
+        $categories = Category::query()->latest()->paginate(20);
         return view('admin.categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $parentCategories = Category::where('parent_id', 0)->get();
+        $parentCategories = Category::query()->where('parent_id', 0)->get();
         $attributes = Attribute::all();
         return view('admin.categories.create', compact('parentCategories', 'attributes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -82,23 +66,11 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Request $request, Category $category)
     {
         return view('admin.categories.show', compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, Category $category)
     {
         $parentcategories = Category::where('parent_id', 0)->get();
@@ -106,13 +78,6 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('parentcategories','attributes', 'category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -160,12 +125,6 @@ class CategoryController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
@@ -173,9 +132,8 @@ class CategoryController extends Controller
 
     public function getCategoryAttributes(Category $category)
     {
-        $attributes=$category->attributes()->wherePivot('is_variation',0)->get();
-        $variation=$category->attributes()->wherePivot('is_variation',1)->first();
-        return ['attrubtes'=>$attributes,'variation'=>$variation];
-
+        $attributes = $category->attributes()->wherePivot('is_variation' ,0)->get();
+        $variation = $category->attributes()->wherePivot('is_variation' ,1)->first();
+        return ['attributes' => $attributes , 'variation' => $variation];
     }
 }

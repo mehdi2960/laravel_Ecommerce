@@ -17,7 +17,7 @@ class WishlistController extends Controller
                 return redirect()->back();
             } else {
                 Wishlist::create([
-                    'user_is' => auth()->id(),
+                    'user_id' => auth()->id(),
                     'product_id' => $product->id
                 ]);
                 alert()->success('محصول مورد نظر به لیست علاقه مندی های شمااضافه شد', 'باتشکر')->persistent('حله');

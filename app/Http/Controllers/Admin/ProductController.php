@@ -17,19 +17,17 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->paginate(20);
+        $products = Product::query()->latest()->paginate(20);
         return view('admin.products.index', compact('products'));
     }
-
 
     public function create()
     {
        $brands=Brand::all();
        $tags=Tag::all();
-       $categories=Category::where('parent_id','!=',0)->get();
+       $categories=Category::query()->where('parent_id','!=',0)->get();
        return view('admin.products.create',compact('brands','tags','categories'));
     }
-
 
     public function store(Request $request)
     {

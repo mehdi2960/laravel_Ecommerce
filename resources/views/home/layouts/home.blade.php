@@ -48,10 +48,10 @@
         $("#overlayer").delay(1000).fadeOut("slow");
     })
 
-    function logoutUser()
-    {
-        document.querySelector('#logout').submit();
-    }
+    // function logoutUser()
+    // {
+    //     document.querySelector('#logout').submit();
+    // }
 </script>
 
 {!!  GoogleReCaptchaV3::init() !!}

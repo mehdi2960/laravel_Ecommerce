@@ -9,11 +9,9 @@
         $('#brandSelect').selectpicker({
             'title': 'انتخاب برند'
         });
-
         $('#tagSelect').selectpicker({
             'title': 'انتخاب تگ'
         });
-
         // Show File Name
         $('#primary_image').change(function() {
             //get the file name
@@ -21,34 +19,27 @@
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         });
-
         $('#images').change(function() {
             //get the file name
             var fileName = $(this).val();
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         });
-
         $('#categorySelect').selectpicker({
             'title': 'انتخاب دسته بندی'
         });
-
         $('#attributesContainer').hide();
-
         $('#categorySelect').on('changed.bs.select', function() {
             let categoryId = $(this).val();
-            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response,status) {
-
+            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response,
+                                                                                                     status) {
                 if (status == 'success') {
-
                     // console.log(response);
                     $('#attributesContainer').fadeIn();
-
                     // Empty Attribute Container
                     $('#attributes').find('div').remove();
-
                     // Create and Append Attributes Input
-                    response.attrubtes.forEach(attribute => {
+                    response.attributes.forEach(attribute => {
                         let attributeFormGroup = $('<div/>', {
                             class: 'form-group col-md-3'
                         });
@@ -127,8 +118,7 @@
 
                     <div class="form-group col-md-12">
                         <label for="description">توضیحات</label>
-                        <textarea class="form-control" id="description"
-                                  name="description">{{ old('description') }}</textarea>
+                        <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                     </div>
 
                     {{-- Product Image Section --}}
@@ -165,7 +155,9 @@
                                 <label for="category_id">دسته بندی</label>
                                 <select id="categorySelect" name="category_id" class="form-control" data-live-search="true">
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }} -
+                                        <option value="{{ $category->id }}">
+                                            {{ $category->name }}
+                                            -
                                             {{ $category->parent->name }}
                                         </option>
                                     @endforeach
@@ -178,7 +170,8 @@
                         <div id="attributes" class="row"></div>
                         <div class="col-md-12">
                             <hr>
-                            <p>افزودن قیمت و موجودی برای متغیر <span class="font-weight-bold" id="variationName"></span> :
+                            <p>افزودن قیمت و موجودی برای متغیر
+                                <span class="font-weight-bold" id="variationName"></span> :
                             </p>
                         </div>
 

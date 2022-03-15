@@ -35,6 +35,7 @@
                                     <div class="myaccount-content">
                                         <h3> پروفایل </h3>
                                         <div class="account-details-form">
+
                                             <form action="#">
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -42,7 +43,7 @@
                                                             <label for="first-name" class="required">
                                                                 نام
                                                             </label>
-                                                            <input type="text" id="first-name" />
+                                                            <input type="text" id="first-name" value="{{$user->name}}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
@@ -50,13 +51,13 @@
                                                             <label for="last-name" class="required">
                                                                 نام خانوادگی
                                                             </label>
-                                                            <input type="text" id="last-name" />
+                                                            <input type="text" id="last-name" value="{{$user->name ? $user->name:''}}"  />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="single-input-item">
                                                     <label for="email" class="required"> ایمیل </label>
-                                                    <input type="email" id="email" disabled />
+                                                    <input type="email" id="email" value="{{$user->email}}" disabled />
                                                 </div>
 
                                                 <div class="single-input-item">
@@ -64,6 +65,7 @@
                                                 </div>
 
                                             </form>
+
                                             <form action="#">
                                                 <fieldset>
                                                     <legend> تغییر پسورد </legend>
@@ -95,6 +97,7 @@
                                                     <button class="check-btn sqr-btn "> تغییر رمز عبور </button>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>

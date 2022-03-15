@@ -48,7 +48,7 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
         Route::resource('attributes', AttributeController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
-        Route::resource('products', ProductController::class)->middleware(['role:admin']);
+        Route::resource('products', ProductController::class);
         Route::resource('banners', BannerController::class);
         Route::resource('comments', CommentController::class);
         Route::resource('coupons', CouponController::class);
@@ -118,8 +118,6 @@ Route::prefix('profile')->name('home.')->group(function () {
     Route::get('/comments',[HomeCommentController::class,'UsersProfileIndex'])->name('comments.users_profile.index');
     Route::get('/wishlist',[WishlistController::class,'UsersProfileIndex'])->name('wishlist.users_profile.index');
     Route::get('/logout', [LogoutController::class ,'logoutForm'])->name('users_profile.logoutForm');
-
-
 });
 
 //about-us

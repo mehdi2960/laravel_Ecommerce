@@ -15,17 +15,17 @@
         آدرس ها
     </a>
 
-    <a href="{{route('home.wishlist.users_profile.index')}}" class="{{request()->is('profile/wishlist') ?'active':''}}">
+    <a href="{{route('home.wishlist.users_profile.index')}}" class="{{request()->is('profile/wishlist') ? 'active':''}}">
         <i class="sli sli-heart ml-1"></i>
         لیست علاقه مندی ها
     </a>
 
-    <a href="{{route('home.comments.users_profile.index')}}" class="{{request()->is('profile/comments') ?'active':''}}">
+    <a href="{{route('home.comments.users_profile.index')}}" class="{{request()->is('profile/comments') ? 'active':''}}">
         <i class="sli sli-bubble ml-1"></i>
         نظرات
     </a>
 
-    <a href="{{route('home.users_profile.logoutForm')}}" onclick="logoutUser()" class="{{request()->is('profile/logout') ?'active':''}}">
+    <a href="{{route('home.users_profile.logoutForm')}}" class="{{request()->is('profile/logout') ? 'active':''}}">
         <i class="sli sli-logout ml-1"></i>
         خروج
     </a>
