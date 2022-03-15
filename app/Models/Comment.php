@@ -15,8 +15,9 @@ class Comment extends Model
 
     public function getApprovedAttribute($approved)
     {
-        return $approved ? 'تایید نشده' : 'تایید شده';
+        return $approved ? 'تایید شده' : 'تایید نشده' ;
     }
+
 
     public function user()
     {

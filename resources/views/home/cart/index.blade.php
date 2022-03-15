@@ -55,14 +55,13 @@
                                     @foreach(\Cart::getContent() as $item)
                                         <tr>
                                             <td class="product-thumbnail">
-                                                <a href="{{route('home.products.show',['product'=>$item->associatedModal->slug])}}">
-                                                    <img width="100"
-                                                         src="{{asset(env('PRODUCT_IMAGES_UPLOAD_PATH').$item->associatedModal->primary_image)}}"
-                                                         alt="">
+                                                <a href="{{ route('home.products.show' , ['product' => $item->associatedModel->slug]) }}">
+                                                    <img width="100" alt="" src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $item->associatedModel->primary_image) }}" />
                                                 </a>
                                             </td>
+
                                             <td class="product-name">
-                                                <a href="{{route('home.products.show',['product'=>$item->associatedModal->slug])}}"> {{$item->name}} </a>
+                                                <a href="{{ route('home.products.show' , ['product' => $item->associatedModel->slug]) }}"> {{ $item->name }} </a>
                                                 <p class="mb-0" style="font-size: 12px; color: red;">
                                                     {{\App\Models\Attribute::find($item->attributes->attribute_id)->name}}
                                                     :

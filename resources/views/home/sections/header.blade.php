@@ -96,7 +96,9 @@
                                         @foreach(\Cart::getContent() as $item)
                                             <li class="single-shopping-cart">
                                                 <div class="shopping-cart-title">
-                                                    <h4><a href="{{route('home.products.show',['product'=>$item->associatedModal->slug])}}">{{$item->name}}</a></h4>
+                                                    <h4>
+                                                        <a href="#">{{$item->name}}</a>
+                                                    </h4>
                                                     <span>{{$item->quantity}} x {{number_format($item->price)}}</span>
                                                   <div style="direction: rtl;">
                                                      <p class="mb-0" style="font-size: 12px;">
@@ -114,11 +116,11 @@
                                                 </div>
 
                                                 <div class="shopping-cart-img">
-                                                    <a href="{{route('home.products.show',['product'=>$item->associatedModal->slug])}}">
-                                                        <img alt="" src="{{asset(env('PRODUCT_IMAGES_UPLOAD_PATH').$item->associatedModal->primary_image)}}"/>
+                                                    <a href="{{ route('home.products.show' , ['product' => $item->associatedModel->slug]) }}">
+                                                        <img alt="" src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $item->associatedModel->primary_image) }}" />
                                                     </a>
                                                     <div class="item-close">
-                                                        <a href="{{route('home.cart.remove',['rowId'=>$item->id])}}"><i class="sli sli-close"></i></a>
+                                                        <a href="{{ route('home.cart.remove' , ['rowId' => $item->id]) }}"><i class="sli sli-close"></i></a>
                                                     </div>
                                                 </div>
                                             </li>

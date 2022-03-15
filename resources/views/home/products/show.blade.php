@@ -248,7 +248,7 @@
                                             <div class="review-img">
                                                 <img src="{{$comment->user->avatar == null ? asset('/images/home/user.png') :$comment->user->avatar}}" alt="">
                                             </div>
-                                            <div class="review-content text-right">
+                                            <div class="review-content w-100 text-right align-items-center">
                                                 <p class="text-right">
                                                     {{$comment->text}}
                                                 </p>

@@ -41,8 +41,10 @@
                             </th>
                             <th>{{$comment->text}}</th>
 
-                            <th class="{{$comment->getRowOriginal('approved')?'text-success':'text-danger'}}">
-                                {{$comment->approved}}
+                            <th>
+                                <span class="{{ $comment->getRawOriginal('approved') ? 'text-success' : 'text-danger' }}">
+                                   {{$comment->approved}}
+                                </span>
                             </th>
                             <th>
                                 <a class="btn btn-sm btn-success"

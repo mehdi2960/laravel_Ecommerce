@@ -20,7 +20,7 @@
 
                 <div class="form-group col-md-3">
                     <label>نام محصول</label>
-                    <input type="text" class="form-control" value="{{($comment->product-name)}}" disabled>
+                    <input type="text" class="form-control" value="{{($comment->product->name)}}" disabled>
                 </div>
 
                 <div class="form-group col-md-3">
@@ -35,7 +35,7 @@
 
                 <div class="form-group col-md-12">
                     <label>متن</label>
-                    <textarea name="text" rows="10">{{$comment->text}}</textarea>
+                    <textarea class="form-control" name="text" rows="10">{{$comment->text}}</textarea>
                 </div>
             </div>
             <a href="{{route('admin.comments.index')}}" class="btn btn-dark mt-5">بازگشت</a>

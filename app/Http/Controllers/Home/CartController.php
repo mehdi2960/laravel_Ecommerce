@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariation;
-use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -33,8 +32,8 @@ class CartController extends Controller
 
         // add the product to cart
         $rowId = $product->id . '-' . $productVariation->id;
-        if (Cart::get($rowId) == null) {
-            Cart::add(array(
+        if (\Cart::get($rowId) == null) {
+            \Cart::add(array(
                 'id' => $rowId,
                 'name' => $product->name,
                 'price' => $productVariation->is_sale ? $productVariation->sale_price : $productVariation->price,
@@ -58,13 +57,13 @@ class CartController extends Controller
         ]);
 
         foreach ($request->qtybutton as $rowId => $quantity) {
-            $item = Cart::get($rowId);
+            $item = \Cart::get($rowId);
             if ($quantity > $item->attributes->quantity) {
                 alert()->error('تعداد وارد شده از محصول درست نمی باشد.', 'دقت کنید');
                 return redirect()->back();
             }
 
-            Cart::update($rowId, array(
+            \Cart::update($rowId, array(
                 'quantity' => array(
                     'relative' => false,
                     'value' => $quantity
@@ -78,7 +77,7 @@ class CartController extends Controller
 
     public function remove($rowId)
     {
-        Cart::remove($rowId);
+        \Cart::remove($rowId);
 
         alert()->success('محصول مورد نطر از سبد خرید شما حذف شد.', 'با تشکر');
         return redirect()->back();
@@ -86,7 +85,7 @@ class CartController extends Controller
 
     public function clear()
     {
-        Cart::clear();
+        \Cart::clear();
 
         alert()->warning('سبد خرید شما پاک شد.', 'با تشکر');
         return redirect()->back();
