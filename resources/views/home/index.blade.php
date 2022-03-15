@@ -150,11 +150,10 @@
                                             <div class="ht-product-action">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" data-toggle="modal"
-                                                           data-target="#productModal-{{$product->id}}"><i
-                                                                class="sli sli-magnifier"></i><span
-                                                                class="ht-product-action-tooltip"> مشاهده سریع
-                                                    </span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#productModal-{{$product->id}}">
+                                                            <i class="sli sli-magnifier"></i>
+                                                            <span class="ht-product-action-tooltip"> مشاهده سریع</span>
+                                                        </a>
                                                     </li>
                                                     <li>
                                                        @auth
@@ -167,14 +166,14 @@
                                                             @else
                                                                 <a href="{{route('home.wishlist.add',['product'=>$product->id])}}"><i class="sli sli-heart"></i>
                                                                     <span class="ht-product-action-tooltip">
-                                                                افزودن به علاقه مندی ها
+                                                                افزودن به لیست علاقه مندی ها
                                                             </span>
                                                                 </a>
                                                             @endif
                                                         @else
                                                             <a href="{{route('home.wishlist.add',['product'=>$product->id])}}"><i class="sli sli-heart"></i>
                                                                 <span class="ht-product-action-tooltip">
-                                                                افزودن به علاقه مندی ها
+                                                                افزودن به لیست علاقه مندی ها
                                                             </span>
                                                             </a>
                                                         @endauth
@@ -343,7 +342,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+    <!-- Modal -->
         @foreach($products as $product)
             <div class="modal fade" id="productModal-{{$product->id}}" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -403,6 +402,7 @@
                                                 @endforeach
                                             </ul>
                                         </div>
+
                                         <form action="{{route('home.cart.add')}}" method="POST">
                                             <input type="hidden" name="product_id" value="{{$product->id}}">
                                             @csrf
