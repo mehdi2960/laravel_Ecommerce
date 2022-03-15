@@ -1,16 +1,14 @@
 @extends('home.layouts.home')
 
 @section('title')
-    صفحه ورود
+    صفحه ای ورود
 @endsection
 
 @section('script')
     <script>
         let loginToken;
-
         $('#checkOTPForm').hide();
         $('#resendOTPButton').hide();
-
         $('#loginForm').submit(function(event){
             // console.log( $('#cellphoneInput').val() );
             event.preventDefault();
@@ -18,7 +16,6 @@
                 {
                     '_token' : "{{ csrf_token() }}",
                     'cellphone' : $('#cellphoneInput').val()
-
                 } , function(response , status){
                     console.log(response , status);
                     loginToken = response.login_token;
@@ -28,27 +25,23 @@
                         button : 'حله!',
                         timer : 2000
                     });
-
                     $('#loginForm').fadeOut();
                     $('#checkOTPForm').fadeIn();
                     timer();
                 }).fail(function(response){
-                // console.log(response.responseJSON);
+                console.log(response.responseJSON);
                 $('#cellphoneInput').addClass('mb-1');
                 $('#cellphoneInputError').fadeIn();
                 $('#cellphoneInputErrorText').html(response.responseJSON.errors.cellphone[0]);
             })
         });
-
         $('#checkOTPForm').submit(function(event){
             event.preventDefault();
-
             $.post("{{ url('/check-otp') }}",
                 {
                     '_token' : "{{ csrf_token() }}",
                     'otp' : $('#checkOTPInput').val(),
                     'login_token' : loginToken
-
                 } , function(response , status){
                     console.log(response , status);
                     $(location).attr('href' , "{{ route('home.index') }}");
@@ -59,7 +52,6 @@
                 $('#checkOTPInputErrorText').html(response.responseJSON.errors.otp[0]);
             })
         });
-
         $('#resendOTPButton').click(function(event){
             event.preventDefault();
             $.post("{{ url('/resend-otp') }}",
@@ -88,8 +80,7 @@
                 });
             })
         });
-
-        function timer()  {
+        function timer() {
             let time = "1:01";
             let interval = setInterval(function() {
                 let countdown = time.split(':');
@@ -109,7 +100,6 @@
                 time = minutes + ':' + seconds;
             }, 1000);
         }
-
     </script>
 @endsection
 
@@ -171,6 +161,8 @@
                                                 </div>
                                             </div>
                                         </form>
+
+
                                     </div>
                                 </div>
                             </div>

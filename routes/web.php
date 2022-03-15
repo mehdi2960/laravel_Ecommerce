@@ -107,8 +107,8 @@ Route::post('/check-coupon', [CartController::class, 'checkCoupon'])->name('home
 
 //OtpSms
 Route::any('/login' , [AuthController::class , 'login'])->name('login');
-Route::post('/check-otp' , [AuthController::class , 'checkOtp']);
-Route::post('/resend-otp' , [AuthController::class , 'resendOtp']);
+Route::post('/check-otp', [AuthController::class, 'checkOtp']);
+Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
 
 
 //Profile
