@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -55,6 +56,7 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
         Route::resource('users', UserController::class);
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);
+        Route::resource('socials', SocialController::class);
 
         //change Approve
         Route::get('/comments /{comment}/change-approve',[CommentController::class,'changeApprove'])->name('comments.change-approve');

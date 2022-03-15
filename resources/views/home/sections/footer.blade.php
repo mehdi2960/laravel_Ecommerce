@@ -4,7 +4,6 @@
             <nav>
                 <ul>
                     <li><a href="{{route('home.index')}}">صفحه ای اصلی </a></li>
-                    <li><a href="#">فروشگاه </a></li>
                     <li><a href="{{route('home.contact-us')}}"> تماس با ما </a></li>
                     <li><a href="{{route('home.about-us')}}">درباره ما </a></li>
                 </ul>
@@ -15,11 +14,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-5 col-12">
+                    @php
+                      $socials=\App\Models\Social::query()->where('is_active',1)->get();
+                    @endphp
                     <div class="footer-social pb-20">
-                        <a href="#">اینستاگرام</a>
-                        <a href="#">تویتر</a>
-                        <a href="#">فیسبوک</a>
-                        <a href="#">لینکدین</a>
+                        @foreach($socials as $social)
+                           <a href="{{$social->link}}">{{$social->title}}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">

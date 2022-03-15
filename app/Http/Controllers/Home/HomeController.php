@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\Comment;
 use App\Models\ContactUs;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Social;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
@@ -17,7 +19,6 @@ class HomeController extends Controller
         SEOTools::setTitle('صفحه اصلی');
         SEOTools::setDescription('وب سایت فروشگاهی');
         SEOTools::opengraph()->setUrl(route('home.index'));
-//        SEOTools::setCanonical('https://codecasts.com.br/lesson');
         SEOTools::opengraph()->addProperty('type', 'articles');
         SEOTools::twitter()->setSite('@LuizVinicius73');
         SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
@@ -26,7 +27,8 @@ class HomeController extends Controller
         $indexTopBanners=Banner::where('type','index-top')->where('is_active',1)->orderBy('priority')->get();
         $indexBottomBanners=Banner::where('type','index-bottom')->where('is_active',1)->orderBy('priority')->get();
         $products=Product::where('is_active',1)->get()->take(5);
-        return view('home.index',compact('sliders','indexTopBanners','indexBottomBanners','products'));
+        $comments=Comment::query()->where('approved',1)->get();
+        return view('home.index',compact('sliders','indexTopBanners','indexBottomBanners','products','comments'));
     }
 
     public function aboutUs()

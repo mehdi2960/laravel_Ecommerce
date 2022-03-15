@@ -242,38 +242,18 @@
                 <div class="row">
                     <div class="col-lg-10 ml-auto mr-auto">
                         <div class="testimonial-active owl-carousel nav-style-1">
-                            <div class="single-testimonial text-center">
-                                <img src="{{asset('images/home/testi-1.png')}}" alt=""/>
+                            @foreach($comments as $comment)
+                               <div class="single-testimonial text-center">
+                                <img src="{{$comment->user->avatar ? asset('images/home/testi-1.png'):asset('images/home/user.png')}}" alt="" style="width: 65px;"/>
                                 <p>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و
-                                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                                    مورد نیاز و
-                                    کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه
-                                    درصد گذشته، حال و
-                                    آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت
+                                    {{$comment->text}}
                                 </p>
                                 <div class="client-info">
                                     <img src="{{asset('images/home/testi.png')}}" alt=""/>
-                                    <h5>لورم ایپسوم</h5>
+                                    <h5>{{$comment->user->name}}</h5>
                                 </div>
                             </div>
-                            <div class="single-testimonial text-center">
-                                <img src="{{asset('images/home/testi-2.png')}}" alt=""/>
-                                <p>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و
-                                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                                    مورد نیاز و
-                                    کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه
-                                    درصد گذشته، حال و
-                                    آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت
-                                </p>
-                                <div class="client-info">
-                                    <img src="{{asset('images/home/testi.png')}}" alt=""/>
-                                    <h5>لورم ایپسوم</h5>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -101,6 +101,7 @@
         <div id="collapseSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.banners.index') }}">بنر ها</a>
+                <a class="collapse-item" href="{{ route('admin.socials.index') }}">شکبه های اجتماعی</a>
             </div>
         </div>
     </li>
