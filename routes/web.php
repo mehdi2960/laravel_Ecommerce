@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\LogoutController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
@@ -116,6 +117,8 @@ Route::prefix('profile')->name('home.')->group(function () {
     Route::get('/',[UserProfileController::class,'index'])->name('users_profile.index');
     Route::get('/comments',[HomeCommentController::class,'UsersProfileIndex'])->name('comments.users_profile.index');
     Route::get('/wishlist',[WishlistController::class,'UsersProfileIndex'])->name('wishlist.users_profile.index');
+    Route::get('/logout', [LogoutController::class ,'logoutForm'])->name('users_profile.logoutForm');
+
 
 });
 
@@ -132,10 +135,10 @@ Route::get('/sitemap-products', [SitemapController::class, 'sitemapProducts'])->
 Route::get('/sitemap-tags', [SitemapController::class, 'sitemapTags'])->name('home.sitemap.tags');
 
 
-Route::get('/test', function () {
-
- $user = User::find(1);
- $user->notify(new OTPSms(1234));
-
-});
+//Route::get('/test', function () {
+//
+// $user = User::find(1);
+// $user->notify(new OTPSms(1234));
+//
+//});
 

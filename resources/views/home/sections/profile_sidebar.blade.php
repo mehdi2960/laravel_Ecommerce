@@ -25,9 +25,13 @@
         نظرات
     </a>
 
-    <a href="login.html">
+    <a href="{{route('home.users_profile.logoutForm')}}" onclick="logoutUser()" class="{{request()->is('profile/logout') ?'active':''}}">
         <i class="sli sli-logout ml-1"></i>
         خروج
     </a>
+
+{{--    <form action="{{route('home.users_profile.logoutForm')}}" method="post" id="logout">--}}
+{{--         @csrf--}}
+{{--    </form>--}}
 
 </div>

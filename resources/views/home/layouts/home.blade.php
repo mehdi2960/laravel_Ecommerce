@@ -47,6 +47,11 @@
         $(".loader").delay(1000).fadeOut("slow");
         $("#overlayer").delay(1000).fadeOut("slow");
     })
+
+    function logoutUser()
+    {
+        document.querySelector('#logout').submit();
+    }
 </script>
 
 {!!  GoogleReCaptchaV3::init() !!}
