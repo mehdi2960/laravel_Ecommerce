@@ -195,43 +195,84 @@
                                     </div>
                                     <div class="your-order-middle">
                                         <ul>
-                                            <li>
-                                                لورم ایپسوم
-                                                -
-                                                ۱
+                                            @foreach(\Cart::getContent() as $item)
+                                            <li class="d-flex justify-content-between">
+                                             <div>
+                                                 {{$item->name}}
+                                                 -
+                                                 {{$item->quantity}}
+                                                 <p class="mb-0" style="font-size: 12px; color: red;">
+                                                     {{\App\Models\Attribute::find($item->attributes->attribute_id)->name}}
+                                                     :
+                                                     {{$item->attributes->value}}
+                                                 </p>
+                                             </div>
                                                 <span>
-                                                        ۵۰۰۰۰
-                                                        تومان
-                                                    </span>
+                                                    {{number_format($item->price)}}
+                                                    تومان
+
+                                                     @if($item->attributes->is_sale)
+                                                        <p style="color: red;font-size: 12px;">
+                                                        {{$item->attributes->persent_sale}}
+                                                        تخفیف
+                                                    </p>
+                                                    @endif
+                                                </span>
                                             </li>
-                                            <li>
-                                                لورم ایپسوم
-                                                -
-                                                ۲
-                                                <span>
-                                                        ۴۰۰۰۰
-                                                        تومان
-                                                    </span>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="your-order-info order-subtotal">
                                         <ul>
-                                            <li> مبلغ
+                                            <li>
+                                                مبلغ
                                                 <span>
-                                                        ۹۰۰۰۰
-                                                        تومان
-                                                    </span>
+                                                    {{number_format(\Cart::getTotal()+cartTotalSaleAmount())}}
+                                                    تومان
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>
+                                    @if(cartTotalSaleAmount() > 0)
+                                        <div class="your-order-info order-subtotal">
+                                            <ul>
+                                                <li>
+                                                    مبلغ تخفیف کالاها :
+                                                    <span style="color: red;">
+                                                     {{number_format(cartTotalSaleAmount())}}
+                                                        تومان
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    @if(session()->has('coupon'))
+                                        <div class="your-order-info order-subtotal">
+                                            <ul>
+                                                <li>
+                                                    مبلغ کد تخفیف :
+                                                    <span style="color: red;">
+                                                       {{number_format(session()->get('coupon.amount'))}}
+                                                        تومان
+                                                   </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="your-order-info order-shipping">
                                         <ul>
                                             <li> هزینه ارسال
-                                                <span>
-                                                        ۸۰۰۰
-                                                        تومان
-                                                    </span>
+                                                @if(cartTotalDeliveryAmount() == 0)
+                                                    <span style="color: red;">
+                                                   رایگان
+                                                </span>
+                                                @else
+                                                    <span>
+                                                {{ number_format(cartTotalDeliveryAmount()) }}
+                                                تومان
+                                            </span>
+                                                @endif
                                             </li>
                                         </ul>
                                     </div>
@@ -239,8 +280,9 @@
                                         <ul>
                                             <li>جمع کل
                                                 <span>
-                                                        ۹۸۰۰۰۰
-                                                        تومان </span>
+                                                    {{number_format(\Cart::getTotal()+cartTotalDeliveryAmount())}}
+                                        تومان
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>
