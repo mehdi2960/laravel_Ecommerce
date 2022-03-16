@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariation;
+use App\Models\Province;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class CartController extends Controller
 {
@@ -110,5 +113,17 @@ class CartController extends Controller
             alert()->success($result['success'], 'با تشکر');
         }
         return redirect()->back();
+    }
+
+    public function checkout()
+    {
+        if (\Cart::isEmpty()){
+            alert()->warning('سبد خرید شما خالی می باشد.', 'دقت کنید');
+            return redirect()->route('home.index');
+        }
+
+        $addresses=UserAddress::query()->where('user_id',auth()->id())->get();
+        $provinces=Province::all();
+         return view('home.cart.checkout',compact('addresses','provinces'));
     }
 }

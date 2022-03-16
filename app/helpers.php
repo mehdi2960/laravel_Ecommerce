@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Province;
 use Carbon\Carbon;
 
 function generateFileName($name)
@@ -62,13 +64,12 @@ function checkCoupon($code)
     }
 
     // کد تخفیف استفاده کرده است یا نه
-   if (Order::where('user_id',auth()->id())->where('coupon_id',$coupon->code)->where('payment_status',1)->exists())
-    {
+    if (Order::where('user_id', auth()->id())->where('coupon_id', $coupon->code)->where('payment_status', 1)->exists()) {
         session()->forget('coupon'); // پاک کردن کد تخفیف
         return ['error' => 'شما قبلا از این کد تخفیف استفاده کرده اید'];
     }
 
-   // چک کردن کوپن تخفیف درصدی یا مبلغی
+    // چک کردن کوپن تخفیف درصدی یا مبلغی
     if ($coupon->getRawOriginal('type') == 'amount') {
         session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $coupon->amount]);
     } else {
@@ -80,6 +81,17 @@ function checkCoupon($code)
     }
 
     return ['success' => 'کد تخفیف برای شما ثبت شد'];
+}
+
+
+function province_name($provinceId)
+{
+    return Province::findOrFail($provinceId)->name;
+}
+
+function city_name($cityId)
+{
+    return City::findOrFail($cityId)->name;
 }
 
 ?>

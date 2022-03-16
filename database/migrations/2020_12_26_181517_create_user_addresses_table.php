@@ -17,6 +17,7 @@ class CreateUserAddressesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('address');
+            $table->string('cellphone');
             $table->string('postal_code');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

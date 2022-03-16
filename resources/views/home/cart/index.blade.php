@@ -191,7 +191,7 @@
                                             تومان
                                         </span>
                                     </h4>
-                                    <a href="#"> ادامه فرآیند خرید </a>
+                                    <a href="{{route('home.orders.checkout')}}"> ادامه فرآیند خرید </a>
                                 </div>
                             </div>
                         </div>

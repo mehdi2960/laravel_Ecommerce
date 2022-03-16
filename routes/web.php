@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
@@ -100,6 +101,7 @@ Route::post('/add-to-cart', [CartController::class, 'add'])->name('home.cart.add
 Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
 Route::put('/cart', [CartController::class, 'update'])->name('home.cart.update');
 Route::get('/clear-cart', [CartController::class, 'clear'])->name('home.cart.clear');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
 
 //Check-coupon
 Route::post('/check-coupon', [CartController::class, 'checkCoupon'])->name('home.coupons.check');
@@ -119,6 +121,9 @@ Route::prefix('profile')->name('home.')->group(function () {
     Route::get('/',[UserProfileController::class,'index'])->name('users_profile.index');
     Route::get('/comments',[HomeCommentController::class,'UsersProfileIndex'])->name('comments.users_profile.index');
     Route::get('/wishlist',[WishlistController::class,'UsersProfileIndex'])->name('wishlist.users_profile.index');
+    Route::get('/addresses',[AddressController::class,'index'])->name('addresses.index');
+    Route::post('/addresses',[AddressController::class,'store'])->name('addresses.store');
+    Route::put('/addresses/{address}',[AddressController::class,'update'])->name('addresses.update');
     Route::get('/logout', [LogoutController::class ,'logoutForm'])->name('users_profile.logoutForm');
 });
 
@@ -134,6 +139,8 @@ Route::get('/sitemap',[SitemapController::class,'index'])->name('home.sitemap.in
 Route::get('/sitemap-products', [SitemapController::class, 'sitemapProducts'])->name('home.sitemap.products');
 Route::get('/sitemap-tags', [SitemapController::class, 'sitemapTags'])->name('home.sitemap.tags');
 
+//Ajax City Link
+Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
 
 //Route::get('/test', function () {
 //

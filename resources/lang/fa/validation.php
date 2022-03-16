@@ -157,7 +157,9 @@ return [
         'longitude'             => 'طول جغرافیایی',
         'latitude'              => 'عرض جغرافیایی',
         'brand_id'              => 'برند',
-        'tag_ids'              => 'تگ ها',
+        'tag_ids'               => 'تگ ها',
+        'postal code'           =>'کد پستی',
+        'city_id'               =>'شهر',
     ],
 
 ];
