@@ -187,7 +187,7 @@
                                     <h4 class="grand-totall-title">
                                         جمع کل:
                                         <span>
-                                           {{number_format(\Cart::getTotal()+cartTotalDeliveryAmount())}}
+                                           {{number_format( cartTotalAmount() )}}
                                             تومان
                                         </span>
                                     </h4>

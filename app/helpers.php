@@ -42,7 +42,6 @@ function cartTotalSaleAmount()
     return $cartTotalSaleAmount;
 }
 
-//هزینه ارسال
 function cartTotalDeliveryAmount()
 {
     $cartTotalDeliveryAmount = 0;
@@ -53,19 +52,31 @@ function cartTotalDeliveryAmount()
     return $cartTotalDeliveryAmount;
 }
 
-// چک کردن کد تخفیف
+function cartTotalAmount()
+{
+    if (session()->has('coupon')) {
+        if (session()->get('coupon.amount') > (\Cart::getTotal() + cartTotalDeliveryAmount())) {
+            return 0;
+        } else {
+            return (\Cart::getTotal() + cartTotalDeliveryAmount()) - session()->get('coupon.amount');
+        }
+    } else {
+        return \Cart::getTotal() + cartTotalDeliveryAmount();
+    }
+
+}
+
 function checkCoupon($code)
 {
     $coupon = Coupon::where('code', $code)->where('expired_at', '>', Carbon::now())->first();
 
     if ($coupon == null) {
-        session()->forget('coupon'); // پاک کردن کد تخفیف
+        session()->forget('coupon');
         return ['error' => 'کد تخفیف وارد شده وجود ندارد'];
     }
 
-    // کد تخفیف استفاده کرده است یا نه
     if (Order::where('user_id', auth()->id())->where('coupon_id', $coupon->code)->where('payment_status', 1)->exists()) {
-        session()->forget('coupon'); // پاک کردن کد تخفیف
+        session()->forget('coupon');
         return ['error' => 'شما قبلا از این کد تخفیف استفاده کرده اید'];
     }
 
@@ -73,7 +84,7 @@ function checkCoupon($code)
     if ($coupon->getRawOriginal('type') == 'amount') {
         session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $coupon->amount]);
     } else {
-        $total = \Cart::getTotal(); // قیمت کل
+        $total = \Cart::getTotal();
 
         $amount = (($total * $coupon->percentage) / 100) > $coupon->max_percentage_amount ? $coupon->max_percentage_amount : (($total * $coupon->percentage) / 100);
 
@@ -82,7 +93,6 @@ function checkCoupon($code)
 
     return ['success' => 'کد تخفیف برای شما ثبت شد'];
 }
-
 
 function province_name($provinceId)
 {

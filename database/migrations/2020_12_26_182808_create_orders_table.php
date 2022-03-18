@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('coupon_id')->nullable();
             $table->foreign('coupon_id')->references('id')->on('coupons')->onDelete('cascade');
             $table->tinyInteger('status')->default(0);
-            $table->unsignedInteger('totla_amount');
+            $table->unsignedInteger('total_amount');
             $table->unsignedInteger('delivery_amount')->default(0);
             $table->unsignedInteger('coupon_amount')->default(0);
             $table->unsignedInteger('paying_amount');
