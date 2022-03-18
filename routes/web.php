@@ -148,10 +148,3 @@ Route::get('/sitemap-tags', [SitemapController::class, 'sitemapTags'])->name('ho
 //Ajax City Link
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
 
-//Route::get('/test', function () {
-//
-// $user = User::find(1);
-// $user->notify(new OTPSms(1234));
-//
-//});
-

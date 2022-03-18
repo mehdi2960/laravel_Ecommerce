@@ -80,7 +80,6 @@ function checkCoupon($code)
         return ['error' => 'شما قبلا از این کد تخفیف استفاده کرده اید'];
     }
 
-    // چک کردن کوپن تخفیف درصدی یا مبلغی
     if ($coupon->getRawOriginal('type') == 'amount') {
         session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $coupon->amount]);
     } else {
