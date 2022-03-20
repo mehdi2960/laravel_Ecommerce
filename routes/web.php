@@ -131,6 +131,7 @@ Route::prefix('profile')->name('home.')->group(function () {
     Route::get('/addresses',[AddressController::class,'index'])->name('addresses.index');
     Route::post('/addresses',[AddressController::class,'store'])->name('addresses.store');
     Route::put('/addresses/{address}',[AddressController::class,'update'])->name('addresses.update');
+    Route::get('/orders',[CartController::class,'userProfileIndex'])->name('orders.users_profile.index');
     Route::get('/logout', [LogoutController::class ,'logoutForm'])->name('users_profile.logoutForm');
 });
 

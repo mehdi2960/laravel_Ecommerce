@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductVariation;
 use App\Models\Province;
@@ -125,5 +126,11 @@ class CartController extends Controller
         $addresses=UserAddress::query()->where('user_id',auth()->id())->get();
         $provinces=Province::all();
          return view('home.cart.checkout',compact('addresses','provinces'));
+    }
+
+    public function userProfileIndex()
+    {
+        $orders=Order::query()->where('user_id',auth()->id())->get();
+        return view('home.user_profile.orders',compact('orders'));
     }
 }
