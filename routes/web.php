@@ -106,7 +106,8 @@ Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.
 
 //Payment
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
-Route::get('/payment-verify', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
+//Route::get('/payment-verify', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
+Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
 
 
 //Check-coupon

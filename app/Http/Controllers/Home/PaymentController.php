@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\OrderTtem;
 use App\Models\ProductVariation;
 use App\Models\Transaction;
+use App\PaymentGateway\Pay;
+use App\PaymentGateway\Zarinpal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -38,89 +40,68 @@ class PaymentController extends Controller
             return redirect()->route('home.index');
         }
 
-        $api = 'test';
-        $amount = $amounts['paying_amount'];
-        $redirect = route('home.payment_verify');
-        $result = $this->send($api, $amount, $redirect);
-        $result = json_decode($result);
-        if ($result->status) {
-            $createOrder = $this->createOrder($request->address_id,$amounts,$result->token,'pay');
-            if (array_key_exists('error', $createOrder)) {
-                alert()->error($createOrder['error'], 'دقت کنید');
+        if ($request->payment_method == 'pay') {
+            $payGateway = new Pay();
+            $payGatewayResult = $payGateway->send($amounts, $request->address_id);
+            if (array_key_exists('error', $payGatewayResult)) {
+                alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
                 return redirect()->back();
-            }
-
-            $go = "https://pay.ir/pg/$result->token";
-            return redirect()->to($go);
-        } else {
-            alert()->error($result->errorMessage, 'دقت کنید');
-            return redirect()->back();
-        }
-    }
-
-    public function paymentVerify(Request $request)
-    {
-        $api = 'test';
-        $token = $request->token;
-        $result = json_decode($this->verify($api, $token));
-        if (isset($result->status)) {
-            if ($result->status == 1) {
-                $updateOrder = $this->updateOrder($token,$result->transId);
-                if (array_key_exists('error', $updateOrder)) {
-                    alert()->error($updateOrder['error'], 'دقت کنید');
-                    return redirect()->back();
-                }
-                \Cart::clear();
-                alert()->success($result->transId.'پرداخت با موفقیت انجام شد. شماره تراکنش','با تشکر')->persistent('حله');
-                return redirect()->route('home.index');
             } else {
-                alert()->error($result->status.'پرداخت با خطا مواجه شد. شماره وضیعت','دقت کنید');
-                return redirect()->route('home.index');
+                return redirect()->to($payGatewayResult['success']);
             }
-        } else {
-            if ($request->status == 0) {
-                alert()->error($request->status.'پرداخت با خطا مواجه شد. شماره وضیعت','دقت کنید');
+        }
+
+        if ($request->payment_method == 'zarinpal') {
+            $zarinpalGateway = new Zarinpal();
+            $zarinpalGatewayResult = $zarinpalGateway->send($amounts, 'خرید تستی', $request->address_id);
+            if (array_key_exists('error', $zarinpalGatewayResult)) {
+                alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
+                return redirect()->back();
+            } else {
+                return redirect()->to($zarinpalGatewayResult['success']);
+            }
+        }
+
+        alert()->error('درگاه پرداخت انتخابی اشتباه میباشد', 'دقت کنید');
+        return redirect()->back();
+    }
+
+    public function paymentVerify(Request $request, $gatewayName)
+    {
+        if ($gatewayName == 'pay') {
+            $payGateway = new Pay();
+            $payGatewayResult = $payGateway->verify($request->token, $request->status);
+
+            if (array_key_exists('error', $payGatewayResult)) {
+                alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
+                return redirect()->back();
+            } else {
+                alert()->success($payGatewayResult['success'], 'با تشکر');
                 return redirect()->route('home.index');
             }
         }
 
-    }
+        if ($gatewayName == 'zarinpal') {
+            $amounts = $this->getAmounts();
+            if (array_key_exists('error', $amounts)) {
+                alert()->error($amounts['error'], 'دقت کنید');
+                return redirect()->route('home.index');
+            }
 
-    public function send($api, $amount, $redirect, $mobile = null, $factorNumber = null, $description = null)
-    {
-        return $this->curl_post('https://pay.ir/pg/send', [
-            'api' => $api,
-            'amount' => $amount,
-            'redirect' => $redirect,
-            'mobile' => $mobile,
-            'factorNumber' => $factorNumber,
-            'description' => $description,
-        ]);
-    }
+            $zarinpalGateway = new Zarinpal();
+            $zarinpalGatewayResult = $zarinpalGateway->verify($request->Authority, $amounts['paying_amount']);
 
-    public function curl_post($url, $params)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-        ]);
-        $res = curl_exec($ch);
-        curl_close($ch);
+            if (array_key_exists('error', $zarinpalGatewayResult)) {
+                alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
+                return redirect()->back();
+            } else {
+                alert()->success($zarinpalGatewayResult['success'], 'با تشکر');
+                return redirect()->route('home.index');
+            }
+        }
 
-        return $res;
-    }
-
-    public function verify($api, $token)
-    {
-        return $this->curl_post('https://pay.ir/pg/verify', [
-            'api' => $api,
-            'token' => $token,
-        ]);
+        alert()->error('مسیر بازگشت از درگاه پرداخت اشتباه می باشد', 'دقت کنید');
+        return redirect()->route('home.orders.checkout');
     }
 
     public function checkCart()
@@ -165,81 +146,5 @@ class PaymentController extends Controller
         ];
     }
 
-    public function createOrder($addressId,$amounts,$token,$gateway_name)
-    {
-        try {
-            DB::beginTransaction();
-            $order=Order::create([
-                'user_id' => auth()->id(),
-                'address_id' => $addressId,
-                'coupon_id' => session()->has('coupon') ? session()->get('coupon.id') : null,
-                'total_amount' => $amounts['total_amount'],
-                'delivery_amount' => $amounts['delivery_amount'],
-                'coupon_amount' => $amounts['coupon_amount'],
-                'paying_amount' => $amounts['paying_amount'],
-                'payment_type' => 'online'
-            ]);
-
-            foreach (\Cart::getContent() as $item)
-            {
-                OrderTtem::create([
-                    'order_id'=>$order->id,
-                    'product_id'=>$item->associatedModel->id,
-                    'product_variation_id'=>$item->attributes->id,
-                    'price'=>$item->price,
-                    'quantity'=>$item->quantity,
-                    'subtotal'=>($item->quantity * $item->price)
-                ]);
-            }
-
-            Transaction::create([
-                'user_id'=>auth()->id(),
-                'order_id'=>$order->id,
-                'amount' => $amounts['paying_amount'],
-                'token' => $token,
-                'gateway_name' => $gateway_name
-            ]);
-
-            DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollBack();
-           return ['error'=>$ex->getMessage()];
-        }
-
-        return ['success'=>'success!'];
-    }
-
-    public function updateOrder($token,$refId)
-    {
-        try {
-            DB::beginTransaction();
-
-            $transaction=Transaction::query()->where('token',$token)->firstOrFail();
-            $transaction->update([
-                'status'=>1,
-                'ref_id'=>$refId
-            ]);
-
-            $order=Order::query()->findOrFail($transaction->order_id);
-            $order->update([
-                'payment_status'=>1,
-                'status'=>1
-            ]);
-
-            foreach (\Cart::getContent() as $item)
-            {
-                $variation = ProductVariation::find($item->attributes->id);
-                $variation->update([
-                    'quantity'=>$variation->quantity - $item->quantity
-                ]);
-            }
-
-            DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollBack();
-            return ['error'=>$ex->getMessage()];
-        }
-
-        return ['success'=>'success!'];
-    }
 }
+
