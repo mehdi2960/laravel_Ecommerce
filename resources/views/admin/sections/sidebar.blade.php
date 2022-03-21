@@ -80,6 +80,8 @@
         </a>
         <div id="collapseOrders" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.orders.index') }}">سفارشات</a>
+                <a class="collapse-item" href="{{ route('admin.transactions.index') }}">تراکنش ها</a>
                 <a class="collapse-item" href="{{ route('admin.coupons.index') }}">کوپن ها</a>
             </div>
         </div>
