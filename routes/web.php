@@ -117,7 +117,7 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentV
 //Check-coupon
 Route::post('/check-coupon', [CartController::class, 'checkCoupon'])->name('home.coupons.check');
 
-
+//OAuth
 //Route::get('/login/{provider}',[AuthController::class,'redirectToProvider'])->name('provider.login');
 //Route::get('/login/{provider}/callback',[AuthController::class,'handleProviderCallback']);
 
