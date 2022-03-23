@@ -1,17 +1,19 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    create products
+    ایجاد محصولات
 @endsection
 
 @section('script')
     <script>
+
         $('#brandSelect').selectpicker({
             'title': 'انتخاب برند'
         });
         $('#tagSelect').selectpicker({
             'title': 'انتخاب تگ'
         });
+
         // Show File Name
         $('#primary_image').change(function() {
             //get the file name
@@ -19,20 +21,22 @@
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         });
+
         $('#images').change(function() {
             //get the file name
             var fileName = $(this).val();
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         });
+
         $('#categorySelect').selectpicker({
             'title': 'انتخاب دسته بندی'
         });
+
         $('#attributesContainer').hide();
         $('#categorySelect').on('changed.bs.select', function() {
             let categoryId = $(this).val();
-            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response,
-                                                                                                     status) {
+            $.get(`{{ url('/admin-panel/management/category-attributes/${categoryId}') }}`, function(response, status) {
                 if (status == 'success') {
                     // console.log(response);
                     $('#attributesContainer').fadeIn();
@@ -62,8 +66,8 @@
             }).fail(function() {
                 alert('مشکل در دریافت لیست ویژگی ها');
             })
-            // console.log(categoryId);
         });
+
         $("#czContainer").czMore();
     </script>
 @endsection

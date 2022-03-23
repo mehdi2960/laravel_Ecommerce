@@ -68,7 +68,7 @@ class ProductController extends Controller
                 'delivery_amount_per_product' => $request->delivery_amount_per_product,
             ]);
 
-            //ProductImage
+            //ProductImages Store
             foreach ($fileNameImages['fileNameImages'] as $fileNameImage) {
                 ProductImage::create([
                     'product_id' => $product->id,

@@ -48,7 +48,7 @@ Route::get('/admin-panel/dashboard', function () {
 })->name('dashboard');
 
 //admin
-Route::prefix('admin-panel/management')->name('admin.')->group(function (){
+Route::prefix('admin-panel/management')->middleware('auth')->name('admin.')->group(function (){
         Route::resource('brands',BrandController::class);
         Route::resource('attributes', AttributeController::class);
         Route::resource('categories', CategoryController::class);
@@ -81,7 +81,6 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
         Route::put('/products/{product}/category-update' ,[ProductController::class , 'updateCategory'])->name('products.category.update');
 
 });
-
 
 //home
 Route::get('/',[HomeController::class,'index'])->name('home.index');
@@ -128,8 +127,9 @@ Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
 
 
 //Profile
-Route::prefix('profile')->name('home.')->group(function () {
+Route::prefix('profile')->middleware('auth')->name('home.')->group(function () {
     Route::get('/',[UserProfileController::class,'index'])->name('users_profile.index');
+    Route::put('/users/{user}',[UserProfileController::class,'update'])->name('users_profile.update');
     Route::get('/comments',[HomeCommentController::class,'UsersProfileIndex'])->name('comments.users_profile.index');
     Route::get('/wishlist',[WishlistController::class,'UsersProfileIndex'])->name('wishlist.users_profile.index');
     Route::get('/addresses',[AddressController::class,'index'])->name('addresses.index');

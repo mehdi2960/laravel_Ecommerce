@@ -93,8 +93,7 @@
                                                     ویرایش آدرس
                                                 </a>
 
-                                                <div id="collapse-address-{{ $address->id }}" class="collapse"
-                                                     style="{{ count($errors->addressUpdate) > 0 && $errors->addressUpdate->first('address_id') == $address->id ? 'display:block' : '' }}">
+                                                <div id="collapse-address-{{ $address->id }}" class="collapse" style="{{ count($errors->addressUpdate) > 0 && $errors->addressUpdate->first('address_id') == $address->id ? 'display:block' : '' }}">
                                                     <form action="{{route('home.addresses.update',['address'=>$address->id])}}" method="post">
                                                         @csrf
                                                         @method('PUT')
