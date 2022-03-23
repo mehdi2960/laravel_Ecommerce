@@ -65,7 +65,7 @@ Route::prefix('admin-panel/management')->middleware('auth')->name('admin.')->gro
         Route::resource('socials', SocialController::class);
 
         //change Approve
-        Route::get('/comments /{comment}/change-approve',[CommentController::class,'changeApprove'])->name('comments.change-approve');
+        Route::get('/comments/{comment}/change-approve',[CommentController::class,'changeApprove'])->name('comments.change-approve');
 
         // Get Category Attributes
         Route::get('/category-attributes/{category}', [CategoryController::class, 'getCategoryAttributes']);
