@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    edit products Images
+   ویرایش تصاویر محصول
 @endsection
 
 @section('script')
@@ -73,8 +73,9 @@
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="image_id" value="{{ $image->id }}">
-                                    <button class="btn btn-primary btn-sm mb-3" type="submit">انتخاب به عنوان تصویر
-                                        اصلی</button>
+                                    <button class="btn btn-primary btn-sm mb-3" type="submit">
+                                        انتخاب به عنوان تصویر اصلی
+                                    </button>
                                 </form>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    show products
+   نمایش محصولات
 @endsection
 
 @section('content')
@@ -60,8 +60,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>هزینه ارسال به ازای محصول اضافی</label>
-                    <input class="form-control" type="text" value="{{ $product->delivery_amount_per_product }}"
-                           disabled>
+                    <input class="form-control" type="text" value="{{ $product->delivery_amount_per_product }}" disabled>
                 </div>
 
                 {{-- Attributes & Variations --}}
@@ -98,14 +97,12 @@
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         <label> قیمت </label>
-                                        <input type="text" disabled class="form-control"
-                                               value="{{ $variation->price }}">
+                                        <input type="text" disabled class="form-control" value="{{ $variation->price }}">
                                     </div>
 
                                     <div class="form-group col-md-3">
                                         <label> تعداد </label>
-                                        <input type="text" disabled class="form-control"
-                                               value="{{ $variation->quantity }}">
+                                        <input type="text" disabled class="form-control" value="{{ $variation->quantity }}">
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -120,8 +117,7 @@
 
                                     <div class="form-group col-md-3">
                                         <label> قیمت حراجی </label>
-                                        <input type="text" value="{{ $variation->sale_price }}" disabled
-                                               class="form-control">
+                                        <input type="text" value="{{ $variation->sale_price }}" disabled class="form-control">
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -151,8 +147,7 @@
 
                 <div class="col-md-3">
                     <div class="card">
-                        <img class="card-img-top"
-                             src="{{ url(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
+                        <img class="card-img-top" src="{{ url(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
                              alt="{{ $product->name }}">
                     </div>
                 </div>

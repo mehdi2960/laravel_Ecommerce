@@ -194,7 +194,7 @@
                                                     <a href="#">{{$product->category->name}}</a>
                                                 </div>
                                                 <h4 class="ht-product-title text-right">
-                                                    <a href="#">{{$product->name}}</a>
+                                                    <a href="{{route('home.products.show',['product'=>$product->slug])}}">{{$product->name}}</a>
                                                 </h4>
                                                 <div class="ht-product-price">
                                                     @if($product->quantity_check)

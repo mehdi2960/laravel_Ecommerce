@@ -13,6 +13,7 @@
             'title': 'انتخاب تگ'
         });
 
+        // Data Picker
         let variations = @json($productVariations);
         variations.forEach(variation => {
             $(`#variationDateOnSaleFrom-${variation.id}`).MdPersianDateTimePicker({
@@ -79,7 +80,7 @@
                         <label for="tag_ids">تگ</label>
                         <select id="tagSelect" name="tag_ids[]" class="form-control" multiple data-live-search="true">
                             @php
-                            $productTagIds = $product->tags()->pluck('id')->toArray()
+                               $productTagIds = $product->tags()->pluck('id')->toArray()
                             @endphp
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}" {{ in_array($tag->id, $productTagIds) ? 'selected' : '' }}>

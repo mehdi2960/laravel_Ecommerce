@@ -26,7 +26,7 @@
                     $('#attributes').find('div').remove();
 
                     // Create and Append Attributes Input
-                    response.attrubtes.forEach(attribute => {
+                    response.attributes.forEach(attribute => {
                         let attributeFormGroup = $('<div/>', {
                             class: 'form-group col-md-3'
                         });
