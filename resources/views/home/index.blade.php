@@ -126,12 +126,12 @@
                     <a class="active" href="#product-1" data-toggle="tab">
                         <h4>مردانه</h4>
                     </a>
-                    <a href="#product-2" data-toggle="tab">
-                        <h4>زنانه</h4>
-                    </a>
-                    <a href="#product-3" data-toggle="tab">
-                        <h4>بچه گانه</h4>
-                    </a>
+{{--                    <a href="#product-2" data-toggle="tab">--}}
+{{--                        <h4>زنانه</h4>--}}
+{{--                    </a>--}}
+{{--                    <a href="#product-3" data-toggle="tab">--}}
+{{--                        <h4>بچه گانه</h4>--}}
+{{--                    </a>--}}
                 </div>
                 <div class="tab-content jump-2">
                     <div id="product-1" class="tab-pane active">
@@ -143,9 +143,7 @@
                                     <div class="ht-product-inner">
                                         <div class="ht-product-image-wrap">
                                             <a href="{{route('home.products.show',['product'=> $product->slug])}}" class="ht-product-image">
-                                                <img
-                                                    src="{{asset(env('PRODUCT_IMAGES_UPLOAD_PATH').$product->primary_image)}}"
-                                                    alt="{{$product->name}}"/>
+                                                <img src="{{asset(env('PRODUCT_IMAGES_UPLOAD_PATH').$product->primary_image)}}" alt="{{$product->name}}"/>
                                             </a>
                                             <div class="ht-product-action">
                                                 <ul>
@@ -158,20 +156,23 @@
                                                     <li>
                                                        @auth
                                                            @if($product->checkUserWishlist(auth()->id()))
-                                                                <a href="{{route('home.wishlist.remove',['product'=>$product->id])}}"><i class="fas fa-heart" style="color: red"></i>
+                                                                <a href="{{route('home.wishlist.remove',['product'=>$product->id])}}">
+                                                                    <i class="fas fa-heart" style="color: red"></i>
                                                                     <span class="ht-product-action-tooltip">
                                                                 به لیست علاقه مندی ها اضافه شده است
                                                             </span>
                                                                 </a>
                                                             @else
-                                                                <a href="{{route('home.wishlist.add',['product'=>$product->id])}}"><i class="sli sli-heart"></i>
+                                                                <a href="{{route('home.wishlist.add',['product'=>$product->id])}}">
+                                                                    <i class="sli sli-heart"></i>
                                                                     <span class="ht-product-action-tooltip">
                                                                 افزودن به لیست علاقه مندی ها
                                                             </span>
                                                                 </a>
                                                             @endif
                                                         @else
-                                                            <a href="{{route('home.wishlist.add',['product'=>$product->id])}}"><i class="sli sli-heart"></i>
+                                                            <a href="{{route('home.wishlist.add',['product'=>$product->id])}}">
+                                                                <i class="sli sli-heart"></i>
                                                                 <span class="ht-product-action-tooltip">
                                                                 افزودن به لیست علاقه مندی ها
                                                             </span>
@@ -179,7 +180,8 @@
                                                         @endauth
                                                     </li>
                                                     <li>
-                                                        <a href="{{route('home.compare.add',['product'=>$product])}}"><i class="sli sli-refresh"></i>
+                                                        <a href="{{route('home.compare.add',['product'=>$product])}}">
+                                                            <i class="sli sli-refresh"></i>
                                                             <span class="ht-product-action-tooltip">
                                                                 مقایسه
                                                            </span>
@@ -194,7 +196,7 @@
                                                     <a href="#">{{$product->category->name}}</a>
                                                 </div>
                                                 <h4 class="ht-product-title text-right">
-                                                    <a href="{{route('home.products.show',['product'=>$product->slug])}}">{{$product->name}}</a>
+                                                    <a href="{{route('home.products.show',['product'=>$product->slug ])}}">{{$product->name}}</a>
                                                 </h4>
                                                 <div class="ht-product-price">
                                                     @if($product->quantity_check)
@@ -269,8 +271,7 @@
                                 <a href="#">
                                     <img src="{{asset(env('BANNER_IMAGES_UPLOAD_PATH').$banner->image)}}" alt="{{$banner->image}}"/>
                                 </a>
-                                <div
-                                    class="{{$loop->last ? 'banner-content banner-position-4':'banner-content banner-position-3'}}">
+                                <div class="{{$loop->last ? 'banner-content banner-position-4':'banner-content banner-position-3'}}">
                                     <h3>{{$banner->title}}</h3>
                                     <h2>{{$banner->text}}</h2>
                                     <a href="{{$banner->button_link}}">{{$banner->button_text}}</a>
@@ -303,7 +304,7 @@
                             </div>
                             <div class="feature-content">
                                 <h4>لورم ایپسوم</h4>
-                                <p>24x7 لورم ایپسوم</p>
+                                <p>لورم ایپسوم</p>
                             </div>
                         </div>
                     </div>

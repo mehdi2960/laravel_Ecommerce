@@ -1,11 +1,12 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    edit product category
+    ویرایش دسته بندی محصولات
 @endsection
 
 @section('script')
     <script>
+
         $('#categorySelect').selectpicker({
             'title': 'انتخاب دسته بندی'
         });

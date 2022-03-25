@@ -95,6 +95,7 @@ class Product extends Model
         return $query;
     }
 
+    // Accessor
     public function getQuantityCheckAttribute()
     {
         return $this->variations()->where('quantity', '>', 0)->first() ?? 0;
@@ -102,12 +103,14 @@ class Product extends Model
 
     public function getSaleCheckAttribute()
     {
-        return $this->variations()->where('quantity', '>', 0)->where('sale_price','!=',null)
+        return $this->variations()->where('quantity', '>', 0)
+           ->where('sale_price','!=',null)
            ->where('date_on_sale_from','<',Carbon::now())
-                ->where('date_on_sale_to','>',Carbon::now())
-                ->orderBy('sale_price')->first() ?? false;
+           ->where('date_on_sale_to','>',Carbon::now())
+           ->orderBy('sale_price')->first() ?? false;
     }
 
+    //Min Price
     public function getPriceCheckAttribute()
     {
         return $this->variations()->where('quantity', '>', 0)->orderBy('price')->first() ?? false;
