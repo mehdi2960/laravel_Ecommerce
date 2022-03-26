@@ -375,7 +375,8 @@
                                         <div class="pro-details-list text-right">
                                             <ul class="text-right">
                                                 @foreach($product->attributes()->with('attribute')->get() as $attribute)
-                                                    <li>-
+                                                    <li>
+                                                        -
                                                         {{$attribute->attribute->name}}
                                                         :
                                                         {{$attribute->value}}
@@ -402,7 +403,8 @@
                                                         <select name="variation" class="form-control variation-select" data-id="{{$product->id}}">
                                                             @foreach ($product->variations()->where('quantity' , '>' , 0)->get() as $variation)
                                                                 <option value="{{ json_encode($variation->only(['id' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
-                                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>{{ $variation->value }}
+                                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
+                                                                    {{ $variation->value }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -444,7 +446,8 @@
                                                 <li>
                                                     <a href="#">
                                                         {{$product->category->parent->name}}
-                                                        ,{{$product->category->name}}
+                                                        ,
+                                                        {{$product->category->name}}
                                                     </a>
                                                 </li>
 
