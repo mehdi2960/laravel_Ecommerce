@@ -22,7 +22,7 @@ class ProductVariation extends Model
     }
 
     //Min Price
-    public function getPersentSaleAttribute()
+    public function getPersentSaleAPersentSaleAttribute()
     {
         return $this->is_sale ? round((($this->price - $this->sale_price) / $this->price) * 100) : null;
     }

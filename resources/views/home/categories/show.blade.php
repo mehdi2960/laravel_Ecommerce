@@ -53,6 +53,7 @@
             $('#filter-form').submit();
         }
 
+        // url Decode
         $('#filter-form').on('submit', function(event) {
             event.preventDefault();
             let currentUrl = '{{ url()->current() }}';
