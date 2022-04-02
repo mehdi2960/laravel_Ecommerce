@@ -143,7 +143,7 @@
                                     <div class="ht-product-inner">
                                         <div class="ht-product-image-wrap">
                                             <a href="{{route('home.products.show',['product'=> $product->slug])}}" class="ht-product-image">
-                                                <img src="{{asset(env('PRODUCT_IMAGES_UPLOAD_PATH').$product->primary_image)}}" alt="{{$product->name}}"/>
+                                                <img height="254" src="{{asset(env('PRODUCT_IMAGES_UPLOAD_PATH').$product->primary_image)}}" alt="{{$product->name}}"/>
                                             </a>
                                             <div class="ht-product-action">
                                                 <ul>
@@ -409,7 +409,6 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-
                                                 </div>
                                                 <div class="pro-details-quality">
                                                     <div class="cart-plus-minus">

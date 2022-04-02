@@ -213,8 +213,8 @@
                                         بیشترین قیمت
                                     </option>
                                     <option value="min"
-                                        {{ request()->has('sortBy') && request()->sortBy == 'min' ? 'selected' : '' }}> کم
-                                        ترین قیمت
+                                        {{ request()->has('sortBy') && request()->sortBy == 'min' ? 'selected' : '' }}>
+                                        کم ترین قیمت
                                     </option>
                                     <option value="latest"
                                         {{ request()->has('sortBy') && request()->sortBy == 'latest' ? 'selected' : '' }}>
@@ -242,36 +242,41 @@
                                             <div class="ht-product-inner">
                                                 <div class="ht-product-image-wrap">
                                                     <a href="product-details.html" class="ht-product-image">
-                                                        <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}" alt="{{ $product->name }}" />
+                                                        <img height="254" src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}" alt="{{ $product->name }}" />
                                                     </a>
                                                     <div class="ht-product-action">
                                                         <ul>
                                                             <li>
-                                                                <a href="#" data-toggle="modal" data-target="#productModal-{{$product->id}}"><i
-                                                                        class="sli sli-magnifier"></i><span
-                                                                        class="ht-product-action-tooltip"> مشاهده سریع
-                                                                    </span></a>
+                                                                <a href="#" data-toggle="modal" data-target="#productModal-{{$product->id}}">
+                                                                    <i class="sli sli-magnifier"></i>
+                                                                    <span class="ht-product-action-tooltip">
+                                                                        مشاهده سریع
+                                                                    </span>
+                                                                </a>
                                                             </li>
                                                             <li>
                                                                 @auth
                                                                     @if($product->checkUserWishlist(auth()->id()))
-                                                                        <a href="{{route('home.wishlist.remove',['product'=>$product->id])}}"><i class="fas fa-heart" style="color: red"></i>
+                                                                        <a href="{{route('home.wishlist.remove',['product'=>$product->id])}}">
+                                                                            <i class="fas fa-heart" style="color: red"></i>
                                                                             <span class="ht-product-action-tooltip">
-                                                                به لیست علاقه مندی ها اضافه شده است
-                                                            </span>
+                                                                              به لیست علاقه مندی ها اضافه شده است
+                                                                            </span>
                                                                         </a>
                                                                     @else
-                                                                        <a href="{{route('home.wishlist.add',['product'=>$product->id])}}"><i class="sli sli-heart"></i>
+                                                                        <a href="{{route('home.wishlist.add',['product'=>$product->id])}}">
+                                                                            <i class="sli sli-heart"></i>
                                                                             <span class="ht-product-action-tooltip">
-                                                                افزودن به علاقه مندی ها
-                                                            </span>
+                                                                              افزودن به علاقه مندی ها
+                                                                            </span>
                                                                         </a>
                                                                     @endif
                                                                 @else
-                                                                    <a href="{{route('home.wishlist.add',['product'=>$product->id])}}"><i class="sli sli-heart"></i>
+                                                                    <a href="{{route('home.wishlist.add',['product'=>$product->id])}}">
+                                                                        <i class="sli sli-heart"></i>
                                                                         <span class="ht-product-action-tooltip">
-                                                                افزودن به علاقه مندی ها
-                                                            </span>
+                                                                          افزودن به علاقه مندی ها
+                                                                        </span>
                                                                     </a>
                                                                 @endauth
                                                             </li>

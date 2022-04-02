@@ -12370,7 +12370,7 @@ ul {
   padding: 0;
 }
 
-/*-- 
+/*--
     - Common Classes
 -----------------------------------------*/
 
@@ -13339,7 +13339,7 @@ a:hover {
 }
 
 /***************************
-    Page section padding 
+    Page section padding
 ****************************/
 
 .ptb-0 {
@@ -13455,7 +13455,7 @@ a:hover {
 }
 
 /***************************
-    Page section margin 
+    Page section margin
 ****************************/
 
 .mtb-0 {
@@ -13530,7 +13530,7 @@ a:hover {
   margin: 290px 0;
 }
 
-/*-- 
+/*--
     - Input Placeholder
 -----------------------------------------*/
 
@@ -13612,8 +13612,8 @@ textarea:focus {
   display: none;
 }
 
-/*-- 
-    Scroll Up 
+/*--
+    Scroll Up
 -----------------------------------------*/
 
 #scrollUp {
@@ -14487,6 +14487,7 @@ textarea:focus {
 
 .main-search-active .sidebar-search-input .form-search {
   position: relative;
+  display: flex;
 }
 
 .main-search-active .sidebar-search-input .form-search input {

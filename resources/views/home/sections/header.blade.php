@@ -1,3 +1,19 @@
+@section('script')
+    <script>
+        function filter() {
+            // Search
+            let search = $('#search-input').val();
+            if (search == "") {
+                $('#filter-search').prop('disabled', true);
+            } else {
+                $('#filter-search').val(search);
+            }
+
+            $('#filter-form').submit();
+        }
+    </script>
+@endsection
+
 <header class="header-area sticky-bar">
     <div class="main-header-wrap">
         <div class="container">
@@ -52,6 +68,7 @@
 
                 <div class="col-xl-3 col-lg-3">
                     <div class="header-right-wrap pt-40">
+
                         <div class="header-search">
                             <a class="search-active" href="#">
                                 <i class="sli sli-magnifier"></i>
@@ -59,6 +76,7 @@
                         </div>
 
                         <div class="cart-wrap">
+
                             <button class="icon-cart-active">
                                     <span class="icon-cart">
                                         <i class="sli sli-bag"></i>
@@ -73,6 +91,7 @@
                                     <span>تومان</span>
                                 @endif
                             </button>
+
                             @if(\Cart::isEmpty())
                               <div class="shopping-cart-content">
                                     <div class="shopping-cart-top">
@@ -100,6 +119,7 @@
                                                         <a href="#">{{$item->name}}</a>
                                                     </h4>
                                                     <span>{{$item->quantity}} x {{number_format($item->price)}}</span>
+
                                                   <div style="direction: rtl;">
                                                      <p class="mb-0" style="font-size: 12px;">
                                                          {{\App\Models\Attribute::find($item->attributes->attribute_id)->name}}
@@ -177,18 +197,19 @@
                 </button>
             </div>
             <div class="sidebar-search-input">
-                <form>
-                    <div class="form-search">
-                        <input id="search" class="input-text" value="" placeholder=" ...جستجو " type="search"/>
-                        <button>
-                            <i class="sli sli-magnifier"></i>
-                        </button>
-                    </div>
-                </form>
+                <div class="form-search">
+                    <input id="search-input" type="text" placeholder="... جستجو "
+                           value="{{ request()->has('search') ? request()->search : '' }}">
+                    <button type="submit" onclick="filter()">
+                        <i class="sli sli-magnifier"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-
+    <form id="filter-form">
+        <input id="filter-search" type="hidden" name="search">
+    </form>
     <div class="header-small-mobile">
         <div class="container">
             <div class="row align-items-center">

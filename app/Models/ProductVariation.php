@@ -21,8 +21,8 @@ class ProductVariation extends Model
         return ($this->sale_price != null && $this->date_on_sale_from < Carbon::now() && $this->date_on_sale_to > Carbon::now()) ? true : false;
     }
 
-    //Min Price
-    public function getPersentSaleAPersentSaleAttribute()
+    //discount percent
+    public function getPersentSaleAttribute()
     {
         return $this->is_sale ? round((($this->price - $this->sale_price) / $this->price) * 100) : null;
     }
