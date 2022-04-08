@@ -111,9 +111,11 @@
                                         <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
                                         <h4>سبد خرید</h4>
                                     </div>
+
                                     <ul>
                                         @foreach(\Cart::getContent() as $item)
                                             <li class="single-shopping-cart">
+
                                                 <div class="shopping-cart-title">
                                                     <h4>
                                                         <a href="#">{{$item->name}}</a>
@@ -146,6 +148,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
+
                                     <div class="shopping-cart-bottom">
                                         <div class="shopping-cart-total d-flex justify-content-between align-items-center"
                                             style="direction: rtl;">

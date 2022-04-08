@@ -107,14 +107,13 @@ Route::put('/cart', [CartController::class, 'update'])->name('home.cart.update')
 Route::get('/clear-cart', [CartController::class, 'clear'])->name('home.cart.clear');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
 
+//Check-coupon
+Route::post('/check-coupon', [CartController::class, 'checkCoupon'])->name('home.coupons.check');
+
 //Payment
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
 //Route::get('/payment-verify', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
 Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
-
-
-//Check-coupon
-Route::post('/check-coupon', [CartController::class, 'checkCoupon'])->name('home.coupons.check');
 
 //OAuth
 //Route::get('/login/{provider}',[AuthController::class,'redirectToProvider'])->name('provider.login');

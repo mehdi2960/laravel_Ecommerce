@@ -33,9 +33,8 @@
                                     <td class="first-column"> محصول </td>
                                     @foreach ($products as $product)
                                         <td class="product-image-title">
-                                            <a href="single-product.html" class="image">
-                                                <img width="200" class="img-fluid" src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
-                                                     alt="Compare Product">
+                                            <a href="#" class="image">
+                                                <img class="img-fluid" src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}" alt="Compare Product" style="width: 100px !important;">
                                             </a>
                                             <a href="{{ route('home.categories.show' , ['category' => $product->category->slug ]) }}" class="category"> {{ $product->category->name }} </a>
                                             <a href="#" class="title"> {{ $product->name }} </a>

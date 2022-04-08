@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="breadcrumb-area pt-35 pb-35 bg-gray" style="direction: rtl;">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -75,7 +76,7 @@
                                              </span>
                                                 @if($item->attributes->is_sale)
                                                     <p style="color: red;font-size: 12px;">
-                                                        {{$item->attributes->persent_sale}}
+                                                        {{$item->attributes->persent_sale}}%
                                                         تومان
                                                     </p>
                                                 @endif
@@ -130,7 +131,7 @@
                                         <form action="{{route('home.coupons.check')}}" method="post">
                                             @csrf
                                             <input type="text" required="" name="code">
-                                            <button class="cart-btn-2" type="submit"> ثبت</button>
+                                            <button class="cart-btn-2" type="submit">ثبت</button>
                                         </form>
                                     </div>
                                 </div>
@@ -194,8 +195,8 @@
                                     <a href="{{route('home.orders.checkout')}}"> ادامه فرآیند خرید </a>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,7 +207,7 @@
                     <i class="sli sli-basket"></i>
                     <h2 class="font-weight-bold my-4">سبد خرید خالی است.</h2>
                     <p class="mb-40">شما هیچ کالایی در سبد خرید خود ندارید.</p>
-                    <a href="#"> ادامه خرید </a>
+                    <a href="{{route('home.index')}}"> ادامه خرید </a>
                 </div>
             </div>
         </div>

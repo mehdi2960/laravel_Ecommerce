@@ -208,27 +208,27 @@
                                             <ul>
                                                 @foreach(\Cart::getContent() as $item)
                                                     <li class="d-flex justify-content-between">
-                                                        <div>
-                                                            {{$item->name}}
-                                                            -
-                                                            {{$item->quantity}}
-                                                            <p class="mb-0" style="font-size: 12px; color: red;">
-                                                                {{\App\Models\Attribute::find($item->attributes->attribute_id)->name}}
-                                                                :
-                                                                {{$item->attributes->value}}
-                                                            </p>
-                                                        </div>
-                                                        <span>
-                                                    {{number_format($item->price)}}
-                                                    تومان
+                                                            <div>
+                                                                {{$item->name}}
+                                                                -
+                                                                {{$item->quantity}}
+                                                                <p class="mb-0" style="font-size: 12px; color: red;">
+                                                                    {{\App\Models\Attribute::find($item->attributes->attribute_id)->name}}
+                                                                    :
+                                                                    {{$item->attributes->value}}
+                                                                </p>
+                                                            </div>
+                                                           <span>
+                                                                {{number_format($item->price)}}
+                                                                تومان
 
-                                                     @if($item->attributes->is_sale)
-                                                                <p style="color: red;font-size: 12px;">
-                                                        {{$item->attributes->persent_sale}}
-                                                        تخفیف
-                                                    </p>
-                                                            @endif
-                                                </span>
+                                                                 @if($item->attributes->is_sale)
+                                                                    <p style="color: red;font-size: 12px;">
+                                                                        {{$item->attributes->persent_sale}}
+                                                                        تخفیف
+                                                                    </p>
+                                                                 @endif
+                                                            </span>
                                                     </li>
                                                 @endforeach
                                             </ul>

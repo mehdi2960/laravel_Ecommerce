@@ -67,7 +67,9 @@
                                                     <p>
                                                         <strong>نام : {{auth()->user()->name==null ? 'کاربر گرامی':auth()->user()->name}}</strong>
                                                         <br>
-                                                        <span class="mr-2"> آدرس : <span>{{$address->title}}</span>
+                                                        <span class="mr-2">
+                                                            آدرس :
+                                                         <span>{{$address->title}}</span>
                                                             ،
                                                          {{$address->address}}
                                                         </span>
@@ -87,8 +89,7 @@
                                                     </p>
 
                                                 </address>
-                                                <a data-toggle="collapse" href="#collapse-address-{{ $address->id }}"
-                                                   class="check-btn sqr-btn">
+                                                <a data-toggle="collapse" href="#collapse-address-{{ $address->id }}" class="check-btn sqr-btn">
                                                     <i class="sli sli-pencil"></i>
                                                     ویرایش آدرس
                                                 </a>
